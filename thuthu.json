@@ -1,0 +1,20 @@
+[
+    {
+        "staffID": "TT001",
+        "staffName": "Nguyen Van A",
+        "phone": "0123456789",
+        "email": "NguyenVanA@gmail.com",
+        "address": "Tran Duy Hung",
+        "shift": "06:00 - 10:00",
+        "salary": 5000000.0
+    },
+    {
+        "staffID": "TT002",
+        "staffName": "NguyenVanB",
+        "phone": "0123456788",
+        "email": "NguyenVanB@gmail.com",
+        "address": "25/5k, Trung Chanh, Hoc Mon, TP. HCM",
+        "shift": "06:00 - 10:00 & 10:00 - 14:00",
+        "salary": 10000000.0
+    }
+]

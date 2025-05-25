@@ -1,0 +1,170 @@
+[
+    {
+        "bookID": "MS001",
+        "bookName": "A manual of the mollusca",
+        "author": "S. P. Woodward",
+        "category": "Chung",
+        "quantity": 20
+    },
+    {
+        "bookID": "MS002",
+        "bookName": "Lexicon Tetraglotton, an English-French-Italian-Spanish Dictionary: Whereunto is Adjoined a Large Nomenclature of the Proper Terms (in All the Four) Belonging to Several Arts and Sciences ... Divided Into Fiftie Two Sections; with Another Volume of the Choicest Proverbs in All the Said Toungs, (consisting of Divers Compleat Tomes) and the English Translated Into the Other Three ... Moroever, There are Sundry Familiar Letters and Verses Running All in Proverbs ... By the Labours, and Lucubrations of James Hovvell",
+        "author": "James Howell",
+        "category": "Chung",
+        "quantity": 13
+    },
+    {
+        "bookID": "MS003",
+        "bookName": "A Library of the World's Best Literature",
+        "author": "Charles Dudley Warner, Hamilton Wright Mabie, Charles Henry Warner, Lucia Isabella Gilbert Runkle, George H. Warner",
+        "category": "Authors",
+        "quantity": 142
+    },
+    {
+        "bookID": "MS004",
+        "bookName": "SIEU QUOC GIA VIET NAM",
+        "author": "Duong Cao Pham",
+        "category": "History",
+        "quantity": 20
+    },
+    {
+        "bookID": "MS005",
+        "bookName": "Kinh te Viet Nam - Thang Tram va Dot Pha",
+        "author": "Phạm Minh Chính, Vương Quân Hoàng",
+        "category": "Chung",
+        "quantity": 1
+    },
+    {
+        "bookID": "MS006",
+        "bookName": "Boi canh REDD+ Viet Nam: Nguyên nhân, doi tuong và the che",
+        "author": "Pham Thu Thuy, Moira Moeliono, Nguyen Thi Hien, Nguyen Huu Tho, Vu Thi Hien",
+        "category": "Chung",
+        "quantity": 1
+    },
+    {
+        "bookID": "MS007",
+        "bookName": "Vietnam",
+        "author": "John Prados",
+        "category": "History",
+        "quantity": 1
+    },
+    {
+        "bookID": "MS008",
+        "bookName": "Vietnam's Year of the Rat",
+        "author": "Ronald Bruce Frankum, Jr.",
+        "category": "History",
+        "quantity": 1
+    },
+    {
+        "bookID": "MS009",
+        "bookName": "Vietnam’s Reforms and Economic Growth",
+        "author": "C. Harvie, T. Van Hoa, Tran Van Hoa",
+        "category": "Business & Economics",
+        "quantity": 1
+    },
+    {
+        "bookID": "MS010",
+        "bookName": "The ‘Hidden Curriculum’ of Vietnam’s English School Textbooks",
+        "author": "Thi Duyen Phuong, Raf Vanderstraeten",
+        "category": "Education",
+        "quantity": 1
+    },
+    {
+        "bookID": "MS011",
+        "bookName": "Recent Trends in Vietnam’s Rapid Economic Development",
+        "author": "Pham Khanh Nam, Almas Heshmati",
+        "category": "Business & Economics",
+        "quantity": 1
+    },
+    {
+        "bookID": "MS012",
+        "bookName": "Vietnam's Development Success Story and the Unfinished SDG Agenda",
+        "author": "Ms.Anja Baum",
+        "category": "Business & Economics",
+        "quantity": 1
+    },
+    {
+        "bookID": "MS013",
+        "bookName": "Vietnam's Forgotten Army",
+        "author": "Andrew Wiest",
+        "category": "Biography & Autobiography",
+        "quantity": 1
+    },
+    {
+        "bookID": "MS014",
+        "bookName": "Vietnam's Political Process",
+        "author": "Casey Lucius",
+        "category": "Political Science",
+        "quantity": 1
+    },
+    {
+        "bookID": "MS015",
+        "bookName": "The Vietnam War Files",
+        "author": "Jeffrey P. Kimball",
+        "category": "Biography & Autobiography",
+        "quantity": 1
+    },
+    {
+        "bookID": "MS016",
+        "bookName": "The Johnson Years: Vietnam, the environment, and science",
+        "author": "Robert A. Divine",
+        "category": "United States",
+        "quantity": 1
+    },
+    {
+        "bookID": "MS017",
+        "bookName": "Vietnam's Children in a Changing World",
+        "author": "Rachel Burr",
+        "category": "Social Science",
+        "quantity": 1
+    },
+    {
+        "bookID": "MS018",
+        "bookName": "Six Degrees of the Bracelet: Vietnam’s Continuing Grip",
+        "author": "John Siegfried",
+        "category": "History",
+        "quantity": 1
+    },
+    {
+        "bookID": "MS019",
+        "bookName": "The Vietnam War on Trial",
+        "author": "Michal R. Belknap",
+        "category": "Biography & Autobiography",
+        "quantity": 1
+    },
+    {
+        "bookID": "MS020",
+        "bookName": "Informality and the Playing Field in Vietnam's Business Sector",
+        "author": "Stoyan Tenev, Amanda Carlier, Omar Chaudry, Quynh-Trang Nguyen",
+        "category": "Business & Economics",
+        "quantity": 1
+    },
+    {
+        "bookID": "MS021",
+        "bookName": "Who's who in Vietnam",
+        "author": "Không rõ tác giả",
+        "category": "Vietnam",
+        "quantity": 1
+    },
+    {
+        "bookID": "MS022",
+        "bookName": "Việt Nam sử lược",
+        "author": "Trọng Kim Trà̂n",
+        "category": "Vietnam",
+        "quantity": 1
+    },
+    {
+        "bookID": "MS023",
+        "bookName": "Reporting Vietnam",
+        "author": "William M. Hammond",
+        "category": "History",
+        "quantity": 1
+    },
+    {
+        "bookID": "MS024",
+        "bookName": "Victory in Vietnam",
+        "author": "Military History Institute of Vietnam",
+        "category": "History",
+        "quantity": 1
+    }
+]
