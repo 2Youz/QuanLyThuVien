@@ -69,18 +69,17 @@ class GiaoDienChinh(tk.Frame):
         btn_book.pack(fill="x", padx=10, pady=5)
         
         # Nút tìm kiếm sách qua API chỉ hiển thị nếu người dùng có quyền
-        if self.user_login.permission:
-            btn_API = tk.Button(
-                self.sidebar,
-                text="Tìm Kiếm Sách Qua API",
-                command= self.open_BookAPI,
-                bg="#9b59b6",
-                fg="white",
-                font=("Arial", 10, "bold"),
-                relief="flat",
-                pady=10
-            )
-            btn_API.pack(fill="x", padx=10, pady=5)
+        btn_API = tk.Button(
+            self.sidebar,
+            text="Tìm Kiếm Sách Qua API",
+            command= self.open_BookAPI,
+            bg="#9b59b6",
+            fg="white",
+            font=("Arial", 10, "bold"),
+            relief="flat",
+            pady=10
+        )
+        btn_API.pack(fill="x", padx=10, pady=5)
         
         # Nút quản lý thủ thư chỉ hiển thị nếu người dùng có quyền
         if self.user_login.permission:

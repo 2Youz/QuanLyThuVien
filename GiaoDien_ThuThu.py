@@ -1,8 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox, ttk
-from DuLieu import ThuThu
+from DuLieu import ThuThu, User
 from QuanLy_ThuThu import QuanLyThuThu
-
 class GiaoDienThuThu(tk.Frame):
     def __init__(self, master):
         super().__init__(master)
