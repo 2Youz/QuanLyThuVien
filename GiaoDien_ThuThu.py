@@ -3,43 +3,53 @@ from tkinter import messagebox, ttk
 from DuLieu import ThuThu, User
 from QuanLy_ThuThu import QuanLyThuThu
 class GiaoDienThuThu(tk.Frame):
-    def __init__(self, master):
+    def __init__(self, master, user_login=None):
         super().__init__(master)
         self.master = master
         self.pack(fill="both", expand=True)
         self.ql_thuthu = QuanLyThuThu()
+        self.user_login = user_login
         self.GiaoDien()
         self.tailaiDuLieu()
         self.capNhatMaThuThuTiepTheo()
-    
-    def capNhatMaThuThuTiepTheo(self):
-        """Tự động tạo mã thủ thư tiếp theo theo format TT001, TT002, ..."""
-        if not self.ql_thuthu.ThuThuList:
-            # Nếu chưa có thủ thư nào, bắt đầu từ TT001
-            ma_moi = "TT001"
-        else:
-            # Tìm số lớn nhất trong danh sách mã thủ thư
-            max_so = 0
-            for thuthu in self.ql_thuthu.ThuThuList:
-                if thuthu.staffID.startswith("TT") and len(thuthu.staffID) == 5:
-                    try:
-                        so = int(thuthu.staffID[2:])  # Lấy phần số từ vị trí thứ 3
-                        if so > max_so:
-                            max_so = so
-                    except ValueError:
-                        continue
-            
-            # Tạo mã mới với số tiếp theo
-            ma_moi = f"TT{(max_so + 1):03d}"
         
-        self.maThuThu.set(ma_moi)
-    
+    def QuyenTruyCap(self):
+        if self.user_login and isinstance(self.user_login, User):
+            return self.user_login.permission
+        return False
+    def capNhatMaThuThuTiepTheo(self):
+        if self.QuyenTruyCap():
+            try:
+                if not self.ql_thuthu.ThuThuList:
+            # Nếu chưa có thủ thư nào, bắt đầu từ TT001
+                    ma_moi = "TT001"
+                else:
+        # Tìm số lớn nhất trong danh sách mã thủ thư
+                    max_so = 0
+                    for thuthu in self.ql_thuthu.ThuThuList:
+                        if thuthu.staffID.startswith("TT") and len(thuthu.staffID) == 5:
+                            try:
+                                so = int(thuthu.staffID[2:])  # Lấy phần số từ vị trí thứ 3
+                                if so > max_so:
+                                    max_so = so
+                            except ValueError:
+                                continue
+                    ma_moi = f"TT{(max_so + 1):03d}"
+                self.maThuThu.set(ma_moi)
+            except Exception as e:
+                messagebox.showerror("Lỗi", f"Có lỗi xảy ra khi cập nhật mã thủ thư: {e}")
+            
     def GiaoDien(self):
-        # Khung chính
+        if self.QuyenTruyCap():
+            self.GiaoDienAdmin()
+        else:
+            self.GiaoDienThuThu()
+        
+    def GiaoDienAdmin(self):
         self.KhungChinh = tk.Frame(self, bg="white")
         self.KhungChinh.pack(fill="both", expand=True, padx=10, pady=10)
-        
         # Khung cho nhập liệu thủ thư
+        
         self.KhungNhapLieu = tk.Frame(self.KhungChinh, bg="white")
         self.KhungNhapLieu.pack(fill="x", pady=(0, 10))
         
@@ -85,7 +95,7 @@ class GiaoDienThuThu(tk.Frame):
         self.caLamViec = tk.StringVar()
         self.cbCaLamViec = ttk.Combobox(Row_4, textvariable=self.caLamViec, width=15, font=("Arial", 10))
         self.cbCaLamViec['values'] = ["06:00 - 10:00", "10:00 - 14:00", "14:00 - 18:00", "06:00 - 10:00 & 10:00 - 14:00","06:00 - 10:00 & 14:00 - 18:00","10:00 - 14:00 & 14:00 - 18:00","Toàn thời gian"]
-        self.cbCaLamViec.set("Sáng")
+        self.cbCaLamViec.set("06:00 - 10:00") 
         self.cbCaLamViec.pack(side="left", padx=(5,20))
         
         tk.Label(Row_4, text="Lương:", bg="white", font=("Arial", 10)).pack(side="left")
@@ -119,6 +129,28 @@ class GiaoDienThuThu(tk.Frame):
                 font=("Arial", 10, "bold"), width=10, height=2).pack(side="left")
         
         # Khung cho hiển thị danh sách thủ thư
+        self.KhungThongTin()
+    
+    def GiaoDienThuThu(self):
+
+        self.KhungChinh = tk.Frame(self, bg="white")
+        self.KhungChinh.pack(fill="both", expand=True, padx=10, pady=10)
+        self.LenDau = tk.Frame(self.KhungChinh, bg="white")
+        self.LenDau.pack(fill="x", pady=(0, 10))
+        self.KhungTimKiem = tk.Frame(self.LenDau, bg="white")
+        self.KhungTimKiem.pack(fill="x", expand=True, pady=(10, 0), padx=10)
+        
+        tk.Label(self.KhungTimKiem, text="Tìm kiếm:", bg="white", font=("Arial", 10)).pack(side="left", padx=5  , pady=0)
+        self.tuKhoaTimKiem = tk.StringVar()
+        self.entryTimKiem = tk.Entry(self.KhungTimKiem, textvariable=self.tuKhoaTimKiem, font=("Arial", 10))
+        self.entryTimKiem.pack(side="left", padx=(5,20))
+        self.entryTimKiem.bind("<Return>", lambda event: self.timKiem())
+        tk.Button(self.KhungTimKiem, text="Tìm kiếm", command=self.timKiem, bg="#9C27B0", fg="white", 
+                font=("Arial", 10, "bold"), width=10, height=2).pack(side="left")
+        self.KhungThongTin()
+        
+        # Khung cho hiển thị danh sách thủ thư   
+    def KhungThongTin(self):
         tree_Khung = tk.Frame(self.KhungChinh, bg="white")
         tree_Khung.pack(fill="both", expand=True, padx=10, pady=(0, 10))
         
@@ -156,8 +188,7 @@ class GiaoDienThuThu(tk.Frame):
         
         style = ttk.Style()
         style.configure("Treeview", font=("Arial", 9), rowheight=25)
-        style.configure("Treeview.Heading", font=("Arial", 10, "bold"))
-    
+        style.configure("Treeview.Heading", font=("Arial", 10, "bold")) 
     def tailaiDuLieu(self):
         # Xóa tất cả các mục hiện tại trong cây
         for item in self.tree.get_children():
@@ -166,8 +197,9 @@ class GiaoDienThuThu(tk.Frame):
         for thuthu in self.ql_thuthu.ThuThuList:
             self.tree.insert("", "end", values=(thuthu.staffID, thuthu.staffName, thuthu.phone, 
                             thuthu.email, thuthu.address, thuthu.shift, f"{thuthu.salary:,.0f}"))
-    
     def on_tree_select(self, event):
+        if not self.QuyenTruyCap():
+            return "break"
         selected_item = self.tree.selection()
         if selected_item:
             item = self.tree.item(selected_item)
@@ -223,25 +255,25 @@ class GiaoDienThuThu(tk.Frame):
     def remove(self):
         maThuThu = self.maThuThu.get().strip()
         if not maThuThu:
-            messagebox.showerror("Lỗi", "❌ Vui lòng chọn thủ thư để xóa.")
+            messagebox.showerror("Lỗi", " Vui lòng chọn thủ thư để xóa.")
             return
         
         if messagebox.askyesno("Xác nhận", f"Bạn có chắc chắn muốn xóa thủ thư '{maThuThu}'?"):
             try:
                 self.ql_thuthu.removeThuThu(maThuThu)
-                messagebox.showinfo("Thông báo", "✅ Xóa thủ thư thành công!")
+                messagebox.showinfo("Thông báo", "Xóa thủ thư thành công!")
                 self.clear()
                 self.tailaiDuLieu()
                 self.capNhatMaThuThuTiepTheo()  # Cập nhật mã tiếp theo sau khi xóa
             except ValueError as e:
                 messagebox.showerror("Lỗi", str(e))
             except Exception as e:
-                messagebox.showerror("Lỗi", f"❌ Lỗi khi xóa thủ thư: {e}")
+                messagebox.showerror("Lỗi", f"Lỗi khi xóa thủ thư: {e}")
     
     def update(self):
         maThuThu = self.maThuThu.get().strip()
         if not maThuThu:
-            messagebox.showerror("Lỗi", "❌ Vui lòng chọn thủ thư để cập nhật.")
+            messagebox.showerror("Lỗi", "Vui lòng chọn thủ thư để cập nhật.")
             return
         
         try:

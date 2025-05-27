@@ -82,8 +82,7 @@ class GiaoDienChinh(tk.Frame):
         btn_API.pack(fill="x", padx=10, pady=5)
         
         # Nút quản lý thủ thư chỉ hiển thị nếu người dùng có quyền
-        if self.user_login.permission:
-            btn_thuthu = tk.Button(
+        btn_thuthu = tk.Button(
                 self.sidebar,
                 text="Quản lý Thủ Thư",
                 command= self.open_ThuThuQuanLy,
@@ -93,7 +92,7 @@ class GiaoDienChinh(tk.Frame):
                 relief="flat",
                 pady=10
             )
-            btn_thuthu.pack(fill="x", padx=10, pady=5)
+        btn_thuthu.pack(fill="x", padx=10, pady=5)
         
         # Nút đăng xuất - Sửa đổi command
         btn_logout = tk.Button(
@@ -150,7 +149,7 @@ class GiaoDienChinh(tk.Frame):
     # Mở giao diện quản lý thủ thư
     def open_ThuThuQuanLy(self):
         self.xoa_KhungChinh()
-        GiaoDienThuThu(self.khungChinh)
+        GiaoDienThuThu(self.khungChinh, self.user_login)
 
 # Chạy thử giao diện
 if __name__ == "__main__":

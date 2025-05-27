@@ -10,11 +10,20 @@
     },
     {
         "staffID": "TT002",
-        "staffName": "NguyenVanB",
+        "staffName": "Nguyen Van B",
         "phone": "0123456788",
         "email": "NguyenVanB@gmail.com",
         "address": "25/5k, Trung Chanh, Hoc Mon, TP. HCM",
         "shift": "06:00 - 10:00 & 10:00 - 14:00",
         "salary": 10000000.0
+    },
+    {
+        "staffID": "TT003",
+        "staffName": "Nguyen Van C",
+        "phone": "0382838505",
+        "email": "NguyenVanC@gmail.com",
+        "address": "28/2j, Quan 1",
+        "shift": "06:00 - 10:00",
+        "salary": 5000000.0
     }
 ]

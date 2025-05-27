@@ -113,17 +113,6 @@ class GiaoDienDangNhap(tk.Frame):
         self.combo_chuc_vu.set("Thủ Thư")
         self.entry_ten_dn.focus_set()
 
-# ======================
-# Hàm kiểm tra mẫu
-# ======================
-def kiemTraQuyenMau(username, password, role):
-    if username == "admin" and password == "admin" and role in ["Quản Lý"]:
-        return User(username, password, role)
-    return None
-
-# ======================
-# Chạy thử
-# ======================
 if __name__ == "__main__":
     ql = QuanLyUser()  # Tải dữ liệu người dùng từ file JSON
     root = tk.Tk()
