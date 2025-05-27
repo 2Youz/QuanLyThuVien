@@ -26,7 +26,7 @@ class QuanLyThuThu:
                     )
                     self.ThuThuList.append(t)
         except (json.JSONDecodeError, FileNotFoundError) as e:
-            print(f"Lỗi khi đọc file: {e}")
+            raise ValueError(f"Lỗi khi đọc file: {e}")
             self.ThuThuList = []
     
     def saveData(self):
@@ -35,7 +35,7 @@ class QuanLyThuThu:
                 thuthuData = [tt.to_dict() for tt in self.ThuThuList]
                 json.dump(thuthuData, file, indent=4, ensure_ascii=False)
         except Exception as e:
-            print(f"Lỗi khi lưu dữ liệu: {e}")
+            raise ValueError(f"Lỗi khi lưu dữ liệu: {e}")
     
     def addThuThu(self, thuthu):
         for tt in self.ThuThuList:

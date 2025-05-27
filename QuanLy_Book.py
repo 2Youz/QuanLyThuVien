@@ -24,7 +24,7 @@ class QuanLyBook:
                     )
                     self.BookList.append(b)
         except (json.JSONDecodeError, FileNotFoundError) as e:
-            print(f"Lỗi khi đọc file: {e}")
+            raise ValueError(f"Lỗi khi đọc file: {e}")
             self.BookList = []
     
     def saveData(self):
@@ -33,12 +33,12 @@ class QuanLyBook:
                 booksData = [book.to_dict() for book in self.BookList]
                 json.dump(booksData, file, indent=4, ensure_ascii=False)
         except Exception as e:
-            print(f"Lỗi khi lưu dữ liệu: {e}")
+            raise ValueError(f"Lỗi khi lưu dữ liệu: {e}")
     
     def addBook(self, book):
         for b in self.BookList:
             if b.bookID == book.bookID:
-                raise ValueError("Mã sách đã tồn tại.")
+                raise ValueError("Mã sách đã tồn tại")
         self.BookList.append(book)
         self.saveData()
     
@@ -47,7 +47,7 @@ class QuanLyBook:
         self.BookList = [book for book in self.BookList if book.bookID != bookID]
         
         if len(self.BookList) == before_count:
-            raise ValueError("Mã sách không tồn tại.")
+            raise ValueError("Mã sách không tồn tại")
         
         self.saveData()
     
@@ -57,7 +57,7 @@ class QuanLyBook:
                 self.BookList[i] = new_book
                 self.saveData()
                 return
-        raise ValueError("Mã sách không tồn tại.")
+        raise ValueError("Mã sách không tồn tại")
     
     def getBookByID(self, bookID):
         for book in self.BookList:

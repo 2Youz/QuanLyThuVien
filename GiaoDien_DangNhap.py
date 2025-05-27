@@ -69,7 +69,7 @@ class GiaoDienDangNhap(tk.Frame):
         user = self.kiemTraQuyen(username, password, role)
 
         if user:
-            messagebox.showinfo("Thành công", f"Đăng nhập thành công với vai trò: {role}")
+            messagebox.showinfo("Thông báo", "Đăng nhập thành công")
             self.master.withdraw()
 
             # Tạo cửa sổ chính mới
@@ -79,9 +79,12 @@ class GiaoDienDangNhap(tk.Frame):
             self.main_window.protocol("WM_DELETE_WINDOW", self.logout_callback)
 
             app = GiaoDienChinh(self.main_window, user, self.logout_callback)
+          
             app.pack(fill="both", expand=True)
+           
             
             self.clear_login_form()
+
         else:
             messagebox.showerror("Lỗi", "Tên đăng nhập, mật khẩu hoặc vai trò không đúng.")
     
@@ -99,10 +102,4 @@ class GiaoDienDangNhap(tk.Frame):
         self.combo_chuc_vu.set("Thủ Thư")
         self.entry_ten_dn.focus_set()
 
-if __name__ == "__main__":
-    ql = QuanLyUser()
-    root = tk.Tk()
-    app = GiaoDienDangNhap(root, ql.kiemTraQuyen)
-    app.pack(fill="both", expand=True)
-    root.resizable(False, False)
-    root.mainloop()
+

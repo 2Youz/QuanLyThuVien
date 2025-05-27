@@ -68,7 +68,7 @@ class GiaoDienChinh(tk.Frame):
         # Nút quản lý sách và thủ thư
         btn_tonghop = tk.Button(
             self.sidebar,
-            text="Quản lý Tổng hợp",
+            text="Sách và Thủ Thư",
             command= self.open_TongHop,
             bg="#16a085",  # Màu xanh lá đậm
             fg="white",
@@ -92,6 +92,7 @@ class GiaoDienChinh(tk.Frame):
     
     # Hàm xử lý đăng xuất
     def dang_xuat(self):
+        messagebox.askyesno("Đăng xuất", "Bạn có chắc chắn muốn đăng xuất không?",)
         if self.on_logout_callback:
             self.on_logout_callback()  # Gọi callback để quay về màn hình đăng nhập
         else:

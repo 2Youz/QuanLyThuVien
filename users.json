@@ -16,5 +16,17 @@
         "password": "1",
         "role": "Thủ Thư",
         "permission": false
+    },
+    {
+        "username": "2",
+        "password": "123456",
+        "role": "Thủ Thư",
+        "permission": false
+    },
+    {
+        "username": "",
+        "password": "",
+        "role": "Thủ Thư",
+        "permission": false
     }
 ]

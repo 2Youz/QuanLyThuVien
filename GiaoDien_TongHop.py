@@ -3,7 +3,7 @@ from tkinter import messagebox, ttk
 from DuLieu import Book, ThuThu
 from QuanLy_Book import QuanLyBook
 from QuanLy_ThuThu import QuanLyThuThu
-
+import re
 class GiaoDienNutBam(tk.Frame):
     def __init__(self, parent, mode, ql_book, ql_thuthu, refresh_callback, selected_data=None):
         self.mode = mode
@@ -14,7 +14,7 @@ class GiaoDienNutBam(tk.Frame):
         
         # Tạo cửa sổ
         self.win = tk.Toplevel(parent)
-        self.win.title("Quản lý Sách" if mode == "book" else "Quản lý Thủ thư")
+        self.win.title("Thông tin sách" if mode == "book" else "Thông tin thủ thư")
         self.win.geometry("340x280" if mode == "book" else "340x340")
         self.win.transient(parent)
         self.win.grab_set()
@@ -32,7 +32,7 @@ class GiaoDienNutBam(tk.Frame):
         # Mã
         tk.Label(frame, text="Mã:").grid(row=0, column=0, sticky="w", pady=5)
         self.var_ma = tk.StringVar()
-        self.entry_ma = tk.Entry(frame, textvariable=self.var_ma, width=30, state="readonly")
+        self.entry_ma = tk.Entry(frame, textvariable=self.var_ma, width=30)
         self.entry_ma.grid(row=0, column=1, pady=5)
         
         # Tên
@@ -103,7 +103,6 @@ class GiaoDienNutBam(tk.Frame):
         tk.Button(btn_frame, text="Sửa", command=self.sua, width=8).pack(side="left", padx=5)
     
     def dien_thong_tin(self, data):
-        """Điền thông tin từ dữ liệu được chọn vào form"""
         if self.mode == "book":
             self.var_ma.set(data[0])
             self.var_ten.set(data[1])
@@ -136,18 +135,30 @@ class GiaoDienNutBam(tk.Frame):
     def them(self):
         try:
             if self.mode == "book":
+                if self.var_soluong.get() < 0:
+                    messagebox.showerror("Lỗi", "Số lượng không được âm")
+                    return
                 book = Book(self.var_ma.get(), self.var_ten.get(), 
                         self.var_tacgia.get(), self.var_theloai.get(), 
                         self.var_soluong.get())
                 self.ql_book.addBook(book)
-                messagebox.showinfo("OK", "Thêm sách thành công")
+                messagebox.showinfo("Thông báo", "Thêm sách thành công")
             else:
+                if self.var_luong.get() < 0:
+                    messagebox.showerror("Lỗi", "Lương không được âm")
+                    return
+                if not re.match(r"^\d{1,10}$", self.var_sdt.get()):
+                    messagebox.showerror("Lỗi", "Số điện thoại không hợp lệ")
+                    return
+                if not re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$', self.var_email.get()):
+                    messagebox.showerror("Lỗi", "Email không hợp lệ")
+                    return
                 thuthu = ThuThu(self.var_ma.get(), self.var_ten.get(),
                             self.var_sdt.get(), self.var_email.get(),
                             self.var_diachi.get(), self.var_ca.get(),
                             self.var_luong.get())
                 self.ql_thuthu.addThuThu(thuthu)
-                messagebox.showinfo("OK", "Thêm thủ thư thành công")
+                messagebox.showinfo("Thông báo", "Thêm thủ thư thành công")
             self.moi()
             self.refresh_callback()
         except Exception as e:
@@ -156,7 +167,7 @@ class GiaoDienNutBam(tk.Frame):
     def xoa(self):
         ma = self.var_ma.get()
         if not ma:
-            messagebox.showerror("Lỗi", "Nhập mã để xóa")
+            messagebox.showerror("Lỗi", "Chọn mã để xóa")
             return
         if messagebox.askyesno("Xác nhận", f"Xóa {ma}?"):
             try:
@@ -164,7 +175,7 @@ class GiaoDienNutBam(tk.Frame):
                     self.ql_book.removeBook(ma)
                 else:
                     self.ql_thuthu.removeThuThu(ma)
-                messagebox.showinfo("OK", "Xóa thành công")
+                messagebox.showinfo("Thông báo", "Xóa thành công")
                 self.moi()
                 self.refresh_callback()
             except Exception as e:
@@ -198,14 +209,14 @@ class GiaoDienNutBam(tk.Frame):
                             self.var_tacgia.get(), self.var_theloai.get(), 
                             self.var_soluong.get())
                 self.ql_book.updateBook(ma, book)
-                messagebox.showinfo("OK", "Sửa sách thành công")
+                messagebox.showinfo("Thông báo", "Sửa sách thành công")
             else:
                 thuthu = ThuThu(ma, self.var_ten.get(),
                             self.var_sdt.get(), self.var_email.get(),
                             self.var_diachi.get(), self.var_ca.get(),
                             self.var_luong.get())
                 self.ql_thuthu.updateThuThu(ma, thuthu)
-                messagebox.showinfo("OK", "Sửa thủ thư thành công")
+                messagebox.showinfo("Thông báo", "Sửa thủ thư thành công")
             self.refresh_callback()
         except Exception as e:
             messagebox.showerror("Lỗi", str(e))
@@ -228,11 +239,11 @@ class GiaoDienSachVaThuThu(tk.Frame):
         btn_frame = tk.Frame(self)
         btn_frame.pack(fill="x", padx=10, pady=10)
         
-        tk.Button(btn_frame, text="Quản lý Sách", command=self.mo_sach, 
+        tk.Button(btn_frame, text="Cập nhật Sách", command=self.mo_sach, 
                 width=15, height=2).pack(side="left", padx=5)
-        
         if self.user_login.permission:
-            tk.Button(btn_frame, text="Quản lý Thủ thư", command=self.mo_thuthu,
+            # Chỉ quản lý thủ thư nếu có quyền
+            tk.Button(btn_frame, text="Cập nhật Thủ thư", command=self.mo_thuthu,
                     width=15, height=2).pack(side="left", padx=5)
         
         # Tìm kiếm sách
@@ -242,14 +253,13 @@ class GiaoDienSachVaThuThu(tk.Frame):
         tk.Button(btn_frame, text="Tìm", command=self.tim_kiem_sach, width=8).pack(side="left", padx=5)
         
         # Tìm kiếm thủ thư
-        if self.user_login.permission:
-            tk.Label(btn_frame, text="Tìm thủ thư:").pack(side="left", padx=(20,5))
-            self.var_tim_thuthu = tk.StringVar()
-            tk.Entry(btn_frame, textvariable=self.var_tim_thuthu, width=15).pack(side="left", padx=5)
-            tk.Button(btn_frame, text="Tìm", command=self.tim_kiem_thuthu, width=8).pack(side="left", padx=5)
+        tk.Label(btn_frame, text="Tìm thủ thư:").pack(side="left", padx=(20,5))
+        self.var_tim_thuthu = tk.StringVar()
+        tk.Entry(btn_frame, textvariable=self.var_tim_thuthu, width=15).pack(side="left", padx=5)
+        tk.Button(btn_frame, text="Tìm", command=self.tim_kiem_thuthu, width=8).pack(side="left", padx=5)
         
         # Bảng sách
-        sach_frame = tk.LabelFrame(self, text="Danh sách sách")
+        sach_frame = tk.LabelFrame(self, text="Thông tin sách")
         sach_frame.pack(fill="both", expand=True, padx=10, pady=(0,5))
         self.tree_sach = ttk.Treeview(sach_frame, columns=("ma","ten","tacgia","theloai","sl"), 
                                 show="headings", height=6)
@@ -269,29 +279,28 @@ class GiaoDienSachVaThuThu(tk.Frame):
         self.tree_sach.pack(fill="both", expand=True, padx=5, pady=5)
         
         # Bảng thủ thư
-        if self.user_login.permission:
-            tt_frame = tk.LabelFrame(self, text="Danh sách thủ thư")
-            tt_frame.pack(fill="both", expand=True, padx=10, pady=5)
-            self.tree_tt = ttk.Treeview(tt_frame, columns=("ma","ten","sdt","email","diachi","ca","luong"), 
+        tt_frame = tk.LabelFrame(self, text="Thông tin thủ thư")
+        tt_frame.pack(fill="both", expand=True, padx=10, pady=5)
+        self.tree_tt = ttk.Treeview(tt_frame, columns=("ma","ten","sdt","email","diachi","ca","luong"), 
                                     show="headings", height=5)
             
-            self.tree_tt.heading("ma", text="Mã")
-            self.tree_tt.heading("ten", text="Tên")
-            self.tree_tt.heading("sdt", text="SĐT")
-            self.tree_tt.heading("email", text="Email")
-            self.tree_tt.heading("diachi", text="Địa chỉ")
-            self.tree_tt.heading("ca", text="Ca")
-            self.tree_tt.heading("luong", text="Lương")
+        self.tree_tt.heading("ma", text="Mã")
+        self.tree_tt.heading("ten", text="Tên")
+        self.tree_tt.heading("sdt", text="SĐT")
+        self.tree_tt.heading("email", text="Email")
+        self.tree_tt.heading("diachi", text="Địa chỉ")
+        self.tree_tt.heading("ca", text="Ca")
+        self.tree_tt.heading("luong", text="Lương")
             
-            self.tree_tt.column("ma", width=70)
-            self.tree_tt.column("ten", width=120)
-            self.tree_tt.column("sdt", width=90)
-            self.tree_tt.column("email", width=150)
-            self.tree_tt.column("diachi", width=150)
-            self.tree_tt.column("ca", width=80)
-            self.tree_tt.column("luong", width=80)
-            self.tree_tt.bind("<Double-1>", self.on_thuthu_double_click)
-            self.tree_tt.pack(fill="both", expand=True, padx=5, pady=5)
+        self.tree_tt.column("ma", width=70)
+        self.tree_tt.column("ten", width=120)
+        self.tree_tt.column("sdt", width=90)
+        self.tree_tt.column("email", width=150)
+        self.tree_tt.column("diachi", width=150)
+        self.tree_tt.column("ca", width=80)
+        self.tree_tt.column("luong", width=80)
+        self.tree_tt.bind("<Double-1>", self.on_thuthu_double_click)
+        self.tree_tt.pack(fill="both", expand=True, padx=5, pady=5)
     
     def on_sach_double_click(self, event):
         selection = self.tree_sach.selection()
@@ -319,11 +328,10 @@ class GiaoDienSachVaThuThu(tk.Frame):
                 book.bookID, book.bookName, book.author, book.category, book.quantity))
     
     def load_data_thuthu(self):    
-        if self.user_login.permission:
-            for item in self.tree_tt.get_children():
-                self.tree_tt.delete(item)
-            for tt in self.ql_thuthu.ThuThuList:
-                self.tree_tt.insert("", "end", values=(
+        for item in self.tree_tt.get_children():
+            self.tree_tt.delete(item)
+        for tt in self.ql_thuthu.ThuThuList:
+            self.tree_tt.insert("", "end", values=(
                     tt.staffID, tt.staffName, tt.phone, tt.email, tt.address, tt.shift, tt.salary))
     
     def tim_kiem_sach(self):
@@ -348,12 +356,3 @@ class GiaoDienSachVaThuThu(tk.Frame):
             for tt in self.ql_thuthu.searchThuThu(keyword):
                 self.tree_tt.insert("", "end", values=(
                     tt.staffID, tt.staffName, tt.phone, tt.email, tt.address, tt.shift, tt.salary))
-
-if __name__ == "__main__":
-    root = tk.Tk()
-    root.title("Quản lý thư viện")
-    root.geometry("800x600")
-    
-    user = type('User', (), {'username': 'admin', 'permission': True})()
-    app = GiaoDienSachVaThuThu(root, user)
-    root.mainloop()

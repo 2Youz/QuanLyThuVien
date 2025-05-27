@@ -54,7 +54,6 @@ class GiaoDienAPI(tk.Frame):
         if not keyword:
             messagebox.showwarning("Cảnh báo", "Vui lòng nhập từ khóa tìm kiếm.")
             return
-
         try:
             # Xóa dữ liệu cũ trong tree
             for item in self.tree.get_children():
@@ -71,9 +70,9 @@ class GiaoDienAPI(tk.Frame):
                 # Hiển thị kết quả trong tree
                 for book in results:
                     self.tree.insert("", "end", values=(
-                        book.get('title', ''),
-                        book.get('author', ''),
-                        book.get('category', '')
+                        book.get('title', ''), # Tên sách
+                        book.get('author', ''), # Tác giả
+                        book.get('category', '') # Thể loại
                     ))
                 self.lbl_result.config(text=f"Tìm thấy {len(results)} kết quả")
             else:
@@ -106,9 +105,9 @@ class GiaoDienAPI(tk.Frame):
             
             # Lấy danh sách sách hiện tại
             try:
-                current_books = ql_book.getAllBooks()  # Hoặc phương thức tương tự
+                current_books = ql_book.getAllBooks()  # Lấy tất cả sách từ quản lý sách
             except:
-                current_books = []
+                current_books = [] # Danh sách sách rỗng nếu không có dữ liệu
             
             # Kiểm tra sách đã tồn tại chưa (theo tên sách)
             existing_book = None
@@ -119,18 +118,17 @@ class GiaoDienAPI(tk.Frame):
             
             if existing_book:
                 # Nếu sách đã tồn tại, cộng dồn số lượng
-                existing_book.quantity += quantity
-                self.lbl_result.config(text=f"Cộng thêm {quantity} cuốn. Tổng: {existing_book.quantity} cuốn")
+                messagebox.showwarning("Cảnh báo",f"Sách {book.bookName} đã tồn tại")
             else:
                 # Tạo mã sách mới
                 book_id = self.generate_book_id(current_books)
                 
                 new_book = Book(
                     book_id,
-                    values[0],  # title
-                    values[1],  # author
-                    values[2],  # category
-                    quantity
+                    values[0],  # bookName - tên sách
+                    values[1],  # author - tác giả
+                    values[2],  # category - thể loại
+                    quantity # quantity - số lượng
                 )
                 
                 ql_book.addBook(new_book)
@@ -153,7 +151,6 @@ class GiaoDienAPI(tk.Frame):
         for i in range(1, 1000):
             if i not in existing_ids:
                 return f"MS{i:03d}"
-        raise ValueError("Hết mã sách khả dụng")
             
     def clear(self):
         self.keyword.set("")

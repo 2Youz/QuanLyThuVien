@@ -26,7 +26,7 @@ class QuanLyUser:
                 users_data = json.load(file)
                 self.UserList = [User(user["username"], user["password"], user["role"], user["permission"]) for user in users_data]
         except (json.JSONDecodeError, FileNotFoundError) as e:
-            print(f"Lỗi khi đọc dữ liệu từ file JSON: {e}")
+            raise ValueError(f"Lỗi khi đọc dữ liệu từ file JSON: {e}")
             self.UserList = []
         
         return self.UserList
@@ -37,7 +37,7 @@ class QuanLyUser:
                 users_data = [{"username": user.username, "password": user.password, "role": user.role, "permission": user.permission} for user in self.UserList]
                 json.dump(users_data, file, indent=4, ensure_ascii=False)
         except Exception as e:
-            print(f"Lỗi khi lưu dữ liệu vào file JSON: {e}")
+            raise ValueError(f"Lỗi khi lưu dữ liệu vào file JSON: {e}")
     
     def addUser(self, user):
         # Kiểm tra trùng lặp
@@ -89,5 +89,5 @@ class QuanLyUser:
                         return User(user["username"], user["password"], user["role"], user.get("permission", False))
             return None
         except (FileNotFoundError, json.JSONDecodeError) as e:
-            print(f"Lỗi khi đọc file users: {e}")
+            raise ValueError(f"Lỗi khi đọc file users: {e}")
             return None

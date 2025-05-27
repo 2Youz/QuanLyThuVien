@@ -64,23 +64,28 @@ class GiaoDienUser(tk.Frame):
             role = self.chucVu.get()
             
             if not username:
-                raise ValueError("Tên đăng nhập không được để trống.")
+                messagebox.showerror("Lỗi","Tên đăng nhập không được để trống.")
+                return
             if not password:
-                raise ValueError("Mật khẩu không được để trống.")
-            if not re.match(r"^[a-zA-Z0-9_]{3,20}$", username):
-                raise ValueError("tên đăng nhập không được có kí tự đặc biệt")
+                messagebox.showerror("Lỗi","Mật khẩu không được để trống.")
+                return
             if len(password) < 6:
-                raise ValueError("Mật khẩu phải có ít nhất 6 ký tự.")
-                
+                messagebox.showerror("Lỗi","Mật khẩu phải có ít nhất 6 ký tự")
+                return
+            if not re.match(r"^[a-zA-Z0-9_]+$", username):
+                messagebox.showerror("Lỗi", "Tên đăng nhập không được chứa ký tự đặc biệt")
+                return
+            if len(username) < 6:
+                messagebox.showerror("Lỗi", "Tên đăng nhập phải có ít nhất 6 ký tự")
+                return
             user = User(username, password, role, role == "Quản Lý")
             self.ql_user.addUser(user)
             messagebox.showinfo("Thông báo", "Thêm người dùng thành công!")
             self.clear()
             self.tailaiDuLieu()
-        except ValueError as e:
-            messagebox.showerror("Lỗi", str(e))
         except Exception as e:
-            messagebox.showerror("Lỗi", f"Lỗi khi thêm người dùng: {e}")
+            messagebox.showerror("Lỗi", str(e))
+
             
     def remove(self):
         username = self.tenDN.get().strip()
@@ -94,10 +99,8 @@ class GiaoDienUser(tk.Frame):
                 messagebox.showinfo("Thông báo", "Xóa người dùng thành công!")
                 self.clear()
                 self.tailaiDuLieu()
-            except ValueError as e:
-                messagebox.showerror("Lỗi", str(e))
             except Exception as e:
-                messagebox.showerror("Lỗi", f"Lỗi khi xóa người dùng: {e}")
+                raise ValueError(f"Lỗi: {e}")
                 
     def update(self):
         username = self.tenDN.get().strip()
@@ -114,18 +117,10 @@ class GiaoDienUser(tk.Frame):
             messagebox.showinfo("Thông báo", "Cập nhật người dùng thành công!")
             self.clear()
             self.tailaiDuLieu()
-        except ValueError as e:
+        except Exception as e:
             messagebox.showerror("Lỗi", str(e))
             
     def clear(self):
         self.tenDN.set("")
         self.matKhau.set("")
         self.chucVu.set("Thủ Thư")
-
-if __name__ == "__main__":
-    root = tk.Tk()
-    root.geometry("480x450")
-    app = GiaoDienUser(root)
-    app.pack(fill="both", expand=True)  
-    root.resizable(False, False)
-    root.mainloop()
