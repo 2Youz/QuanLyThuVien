@@ -1,19 +1,10 @@
 [
     {
-        "staffID": "TT001",
-        "staffName": "Nguyen Van A",
-        "phone": "0123456789",
-        "email": "NguyenVanA@gmail.com",
-        "address": "Tran Duy Hung",
-        "shift": "06:00 - 10:00",
-        "salary": 5000000.0
-    },
-    {
         "staffID": "TT002",
         "staffName": "Nguyen Van B",
         "phone": "0123456788",
         "email": "NguyenVanB@gmail.com",
-        "address": "25/5k, Trung Chanh, Hoc Mon, TP. HCM",
+        "address": "25/7k, Trung Chanh, Hoc Mon, TP. HCM",
         "shift": "06:00 - 10:00 & 10:00 - 14:00",
         "salary": 10000000.0
     },
@@ -22,17 +13,17 @@
         "staffName": "Nguyen Van C",
         "phone": "0382838505",
         "email": "NguyenVanC@gmail.com",
-        "address": "28/2j, Quan 1",
-        "shift": "06:00 - 10:00",
+        "address": "28/2k, Quan 1",
+        "shift": "06:00 - 10:00 & 10:00 - 14:00",
         "salary": 5000000.0
     },
     {
-        "staffID": "TT004",
-        "staffName": "Nguyen Van D",
-        "phone": "0123456777",
-        "email": "NguyenVanD@gmail.com",
-        "address": "Thu Duc",
-        "shift": "Chiều",
-        "salary": 5000000.0
+        "staffID": "TT001",
+        "staffName": "Nguyen Van A",
+        "phone": "0123456789",
+        "email": "NguyenVanA@gmail.com",
+        "address": "Ngo 38 Yen Lang, Dong Da, Ha Noi",
+        "shift": "Toàn thời gian",
+        "salary": 15000000.0
     }
 ]

@@ -4,21 +4,14 @@
         "bookName": "A manual of the mollusca",
         "author": "S. P. Woodward",
         "category": "Chung",
-        "quantity": 20
-    },
-    {
-        "bookID": "MS002",
-        "bookName": "Lexicon Tetraglotton, an English-French-Italian-Spanish Dictionary: Whereunto is Adjoined a Large Nomenclature of the Proper Terms (in All the Four) Belonging to Several Arts and Sciences ... Divided Into Fiftie Two Sections; with Another Volume of the Choicest Proverbs in All the Said Toungs, (consisting of Divers Compleat Tomes) and the English Translated Into the Other Three ... Moroever, There are Sundry Familiar Letters and Verses Running All in Proverbs ... By the Labours, and Lucubrations of James Hovvell",
-        "author": "James Howell",
-        "category": "Chung",
-        "quantity": 13
+        "quantity": 12
     },
     {
         "bookID": "MS003",
         "bookName": "A Library of the World's Best Literature",
         "author": "Charles Dudley Warner, Hamilton Wright Mabie, Charles Henry Warner, Lucia Isabella Gilbert Runkle, George H. Warner",
         "category": "Authors",
-        "quantity": 142
+        "quantity": 20
     },
     {
         "bookID": "MS004",
@@ -166,5 +159,19 @@
         "author": "Military History Institute of Vietnam",
         "category": "History",
         "quantity": 1
+    },
+    {
+        "bookID": "MS002",
+        "bookName": "Bảo mật máy tính",
+        "author": "HUIT",
+        "category": "Chung",
+        "quantity": 2000
+    },
+    {
+        "bookID": "MS025",
+        "bookName": "Cơ Sở Dữ Liệu",
+        "author": "HUIT",
+        "category": "Chung",
+        "quantity": 200
     }
 ]

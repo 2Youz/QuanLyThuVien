@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import messagebox, ttk
-from DuLieu import User
 from GiaoDien_Chinh import GiaoDienChinh
 from QuanLy_User import QuanLyUser
 
@@ -9,11 +8,10 @@ class GiaoDienDangNhap(tk.Frame):
         super().__init__(master)
         self.master = master
         self.kiemTraQuyen = kiemTraQuyen
-        self.main_window = None  # Để lưu reference đến cửa sổ chính
+        self.main_window = None
         self.master.title("Đăng Nhập")
         self.GiaoDien()
     
-    # Thiết lập giao diện đăng nhập
     def GiaoDien(self):
         self.master.geometry("400x400")
         self.master.resizable(False, False)
@@ -54,15 +52,12 @@ class GiaoDienDangNhap(tk.Frame):
         tk.Button(self, text="Đăng nhập", command=self.DangNhap, bg="#4CAF50", fg="white", font=("Arial", 10, "bold")
         ).place(x=startX + 50, y=startY + 270, width=200, height=40)
 
-        # Tự động focus
+        # Tự động focus và phím tắt
         self.entry_ten_dn.focus_set()
-
-        # Phím tắt chuyển focus
         self.entry_ten_dn.bind("<Return>", lambda e: self.entry_mat_khau.focus_set())
         self.entry_mat_khau.bind("<Return>", lambda e: self.DangNhap())
         self.combo_chuc_vu.bind("<Return>", lambda e: self.DangNhap())
     
-    # Kiểm tra quyền đăng nhập
     def DangNhap(self):
         username = self.ten_dn.get().strip()
         password = self.mat_khau.get().strip()
@@ -76,39 +71,29 @@ class GiaoDienDangNhap(tk.Frame):
 
         if user:
             messagebox.showinfo("Thành công", f"Đăng nhập thành công với vai trò: {role}")
-            self.master.withdraw()  # Ẩn cửa sổ đăng nhập
+            self.master.withdraw()
 
             # Tạo cửa sổ chính mới
             self.main_window = tk.Toplevel(self.master)
             self.main_window.geometry("1000x600")
             self.main_window.title("Giao diện chính")
-            
-            # Xử lý khi đóng cửa sổ chính
-            self.main_window.protocol("WM_DELETE_WINDOW", self.on_main_window_close)
+            self.main_window.protocol("WM_DELETE_WINDOW", self.logout_callback)
 
-            # Truyền callback đăng xuất vào GiaoDienChinh
             app = GiaoDienChinh(self.main_window, user, self.logout_callback)
             app.pack(fill="both", expand=True)
             
-            # Xóa dữ liệu đăng nhập
             self.clear_login_form()
         else:
             messagebox.showerror("Lỗi", "Tên đăng nhập, mật khẩu hoặc vai trò không đúng.")
     
-    # Hàm callback khi đăng xuất
     def logout_callback(self):
         if self.main_window:
-            self.main_window.destroy()  # Đóng cửa sổ chính
+            self.main_window.destroy()
             self.main_window = None
         
-        self.master.deiconify()  # Hiển thị lại cửa sổ đăng nhập
-        self.clear_login_form()  # Xóa thông tin đăng nhập cũ
+        self.master.deiconify()
+        self.clear_login_form()
     
-    # Hàm xử lý khi cửa sổ chính bị đóng
-    def on_main_window_close(self):
-        self.logout_callback()
-    
-    # Xóa thông tin đăng nhập
     def clear_login_form(self):
         self.ten_dn.set("")
         self.mat_khau.set("")
@@ -116,7 +101,7 @@ class GiaoDienDangNhap(tk.Frame):
         self.entry_ten_dn.focus_set()
 
 if __name__ == "__main__":
-    ql = QuanLyUser()  # Tải dữ liệu người dùng từ file JSON
+    ql = QuanLyUser()
     root = tk.Tk()
     app = GiaoDienDangNhap(root, ql.kiemTraQuyen)
     app.pack(fill="both", expand=True)

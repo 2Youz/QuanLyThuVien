@@ -1,109 +1,51 @@
 import requests
-import json
 from tkinter import messagebox
 
 class APIBook:
     def __init__(self):
-        # Sử dụng Google Books API (miễn phí)
         self.base_url = "https://www.googleapis.com/books/v1/volumes"
-    # Tìm kiếm sách qua API    
+
     def tim_kiem_sach(self, keyword, max_results=20):
         try:
-            # Tham số tìm kiếm
             params = {
                 'q': keyword,
                 'maxResults': max_results,
-                'printType': 'books',
-                'langRestrict': 'vi'  # Ưu tiên sách tiếng Việt
+                'printType': 'books'
             }
-            
-            # Gửi request
             response = requests.get(self.base_url, params=params, timeout=10)
-            
             if response.status_code == 200:
                 data = response.json()
-                books = []
-                
-                if 'items' in data:
-                    for item in data['items']:
-                        book_info = self.extract_book_info(item)
-                        if book_info:
-                            books.append(book_info)
-                
-                return books
+                return [self.extract_book_info(item) for item in data.get('items', []) if self.extract_book_info(item)]
             else:
-                print(f"Lỗi API: {response.status_code}")
-                return []
-                
+                messagebox.showerror("Lỗi API", f"Mã lỗi: {response.status_code}")
         except requests.exceptions.RequestException as e:
-            print(f"Lỗi kết nối: {e}")
-            return []
+            messagebox.showerror("Lỗi kết nối", str(e))
         except Exception as e:
-            print(f"Lỗi: {e}")
-            return []
-    # Trích xuất thông tin sách từ dữ liệu trả về của API
+            messagebox.showerror("Lỗi không xác định", str(e))
+        return []
+
     def extract_book_info(self, item):
         try:
-            volume_info = item.get('volumeInfo', {})
-            
-            # Lấy thông tin cơ bản
-            title = volume_info.get('title', 'Không có tiêu đề')
-            authors = volume_info.get('authors', ['Không rõ tác giả'])
-            author = ', '.join(authors) if isinstance(authors, list) else str(authors)
-            
-            # Thể loại
-            categories = volume_info.get('categories', ['Chung'])
-            category = categories[0] if categories else 'Chung'
-            
-            # Thông tin khác
-            published_date = volume_info.get('publishedDate', 'Không rõ')
-            description = volume_info.get('description', 'Không có mô tả')
-            page_count = volume_info.get('pageCount', 0)
-            
-            # ISBN
-            industry_identifiers = volume_info.get('industryIdentifiers', [])
-            isbn = ''
-            for identifier in industry_identifiers:
-                if identifier.get('type') in ['ISBN_13', 'ISBN_10']:
-                    isbn = identifier.get('identifier', '')
-                    break
-            
-            # Hình ảnh
-            image_links = volume_info.get('imageLinks', {})
-            thumbnail = image_links.get('thumbnail', '')
-            
+            vi = item.get('volumeInfo', {})
             return {
                 'id': item.get('id', ''),
-                'title': title,
-                'author': author,
-                'category': category,
-                'published_date': published_date,
-                'description': description[:200] + '...' if len(description) > 200 else description,
-                'page_count': page_count,
-                'isbn': isbn,
-                'thumbnail': thumbnail
+                'title': vi.get('title', 'Không có tiêu đề'),
+                'author': ', '.join(vi.get('authors', ['Không rõ tác giả'])),
+                'category': vi.get('categories', ['Chung'])[0],
+                'published_date': vi.get('publishedDate', 'Không rõ'),
+                'isbn': next((i.get('identifier') for i in vi.get('industryIdentifiers', [])
+                              if i.get('type') in ['ISBN_13', 'ISBN_10']), '')
             }
-            
-        except Exception as e:
-            print(f"Lỗi trích xuất thông tin: {e}")
+        except:
             return None
-    # Lấy chi tiết sách theo ID
+
     def get_book_detail(self, book_id):
         try:
-            url = f"{self.base_url}/{book_id}"
-            response = requests.get(url, timeout=10)
-            
+            response = requests.get(f"{self.base_url}/{book_id}", timeout=10)
             if response.status_code == 200:
-                data = response.json()
-                return self.extract_book_info(data)
+                return self.extract_book_info(response.json())
             else:
-                print(f"Lỗi API khi lấy chi tiết: {response.status_code}")
-                return None
-            
+                messagebox.showerror("Lỗi API", f"Lấy chi tiết thất bại: {response.status_code}")
         except Exception as e:
-            print(f"Lỗi lấy chi tiết sách: {e}")
-            return None
-    def getBookByID(self, book_id):
-        return self.get_book_detail(book_id)
-    def searchBooks(self, keyword):
-        return self.tim_kiem_sach(keyword)
+            messagebox.showerror("Lỗi lấy chi tiết sách", str(e))
+        return None
