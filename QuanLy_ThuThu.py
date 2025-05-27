@@ -71,9 +71,13 @@ class QuanLyThuThu:
         results = []
         keyword_lower = keyword.lower()
         for tt in self.ThuThuList:
-            if (keyword_lower in tt.staffName.lower() or 
-                keyword_lower in tt.staffID.lower() or 
+            if (
+                keyword_lower in tt.staffID.lower() or
+                keyword_lower in tt.staffName.lower() or 
+                keyword_lower in tt.address.lower() or
+                keyword_lower in tt.shift.lower() or 
                 keyword_lower in tt.phone or 
-                keyword_lower in tt.email.lower()):
+                keyword_lower in tt.email.lower() 
+                ):
                 results.append(tt)
         return results

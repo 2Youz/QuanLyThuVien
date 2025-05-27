@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import messagebox, ttk
 from DuLieu import User
 from QuanLy_User import QuanLyUser
-
+import re
 class GiaoDienUser(tk.Frame):
     def __init__(self, master):
         super().__init__(master)
@@ -67,6 +67,10 @@ class GiaoDienUser(tk.Frame):
                 raise ValueError("Tên đăng nhập không được để trống.")
             if not password:
                 raise ValueError("Mật khẩu không được để trống.")
+            if not re.match(r"^[a-zA-Z0-9_]{3,20}$", username):
+                raise ValueError("tên đăng nhập không được có kí tự đặc biệt")
+            if len(password) < 6:
+                raise ValueError("Mật khẩu phải có ít nhất 6 ký tự.")
                 
             user = User(username, password, role, role == "Quản Lý")
             self.ql_user.addUser(user)

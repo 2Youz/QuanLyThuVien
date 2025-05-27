@@ -18,7 +18,7 @@
         "bookName": "SIEU QUOC GIA VIET NAM",
         "author": "Duong Cao Pham",
         "category": "History",
-        "quantity": 20
+        "quantity": 13
     },
     {
         "bookID": "MS005",
@@ -180,5 +180,19 @@
         "author": "Alan John Bayard Wace, Maurice Scott Thompson",
         "category": "History",
         "quantity": 1
+    },
+    {
+        "bookID": "MS027",
+        "bookName": "The Journal of the Acoustical Society of America",
+        "author": "Acoustical Society of America",
+        "category": "Acoustical engineering",
+        "quantity": 1
+    },
+    {
+        "bookID": "MS028",
+        "bookName": "Vui Lòng",
+        "author": "Tui",
+        "category": "Sách giáo khoa",
+        "quantity": 12
     }
 ]

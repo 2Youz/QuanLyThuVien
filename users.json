@@ -16,11 +16,5 @@
         "password": "1",
         "role": "Thủ Thư",
         "permission": false
-    },
-    {
-        "username": "nhanvien2",
-        "password": "1",
-        "role": "Thủ Thư",
-        "permission": false
     }
 ]

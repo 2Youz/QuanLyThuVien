@@ -69,7 +69,8 @@ class QuanLyBook:
         results = []
         keyword_lower = keyword.lower()
         for book in self.BookList:
-            if (keyword_lower in book.bookName.lower() or 
+            if (keyword_lower in book.bookID.lower() or
+                keyword_lower in book.bookName.lower() or 
                 keyword_lower in book.author.lower() or 
                 keyword_lower in book.category.lower()):
                 results.append(book)

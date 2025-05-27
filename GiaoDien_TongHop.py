@@ -206,7 +206,6 @@ class GiaoDienNutBam(tk.Frame):
                             self.var_luong.get())
                 self.ql_thuthu.updateThuThu(ma, thuthu)
                 messagebox.showinfo("OK", "Sửa thủ thư thành công")
-            self.moi()
             self.refresh_callback()
         except Exception as e:
             messagebox.showerror("Lỗi", str(e))

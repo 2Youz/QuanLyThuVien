@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import messagebox, ttk
 from GiaoDien_Chinh import GiaoDienChinh
 from QuanLy_User import QuanLyUser
-
+import re
 class GiaoDienDangNhap(tk.Frame):
     def __init__(self, master, kiemTraQuyen):
         super().__init__(master)
@@ -66,7 +66,6 @@ class GiaoDienDangNhap(tk.Frame):
         if not username or not password:
             messagebox.showerror("Lỗi", "Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu.")
             return
-
         user = self.kiemTraQuyen(username, password, role)
 
         if user:
