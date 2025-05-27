@@ -12,7 +12,8 @@ class GiaoDienAPI(tk.Frame):
         self.pack(fill="both", expand=True)
         self.ql_api = APIBook()
         self.GiaoDien()
-        
+    
+    # Thiết lập giao diện chính
     def GiaoDien(self):
         tk.Label(self, text="Từ khóa tìm kiếm:").place(x=20, y=20)
         self.keyword = tk.StringVar()
@@ -36,7 +37,8 @@ class GiaoDienAPI(tk.Frame):
         # Thêm label để hiển thị kết quả tìm kiếm
         self.lbl_result = tk.Label(self, text="", fg="blue", font=("Arial", 10))
         self.lbl_result.place(x=20, y=370)
-        
+    
+    # Xử lý sự kiện khi chọn sách trong treeview
     def on_tree_select(self, event):
         selected_item = self.tree.selection()
         if selected_item:
@@ -44,7 +46,8 @@ class GiaoDienAPI(tk.Frame):
             values = item['values']
             if values:
                 self.keyword.set(values[0])  # Set tên sách vào keyword (index 0 vì bỏ bookID)
-                
+    
+    # Tìm kiếm sách qua API
     def search(self):
         keyword = self.keyword.get().strip()
         if not keyword:
@@ -71,14 +74,14 @@ class GiaoDienAPI(tk.Frame):
                         book.get('author', ''),
                         book.get('category', '')
                     ))
-                self.lbl_result.config(text=f"✅ Tìm thấy {len(results)} kết quả")
+                self.lbl_result.config(text=f"Tìm thấy {len(results)} kết quả")
             else:
-                self.lbl_result.config(text="❌ Không tìm thấy sách nào")
+                self.lbl_result.config(text="Không tìm thấy sách nào")
                 
         except Exception as e:
             print(f"Search error: {e}")
-            self.lbl_result.config(text=f"❌ Có lỗi xảy ra: {e}")
-    
+            self.lbl_result.config(text=f"Có lỗi xảy ra: {e}")
+    # Thêm sách vào hệ thống
     def add_book(self):
         selected_item = self.tree.selection()
         if not selected_item:
@@ -116,7 +119,7 @@ class GiaoDienAPI(tk.Frame):
             if existing_book:
                 # Nếu sách đã tồn tại, cộng dồn số lượng
                 existing_book.quantity += quantity
-                self.lbl_result.config(text=f"✅ Cộng thêm {quantity} cuốn. Tổng: {existing_book.quantity} cuốn")
+                self.lbl_result.config(text=f"Cộng thêm {quantity} cuốn. Tổng: {existing_book.quantity} cuốn")
             else:
                 # Tạo mã sách mới
                 book_id = self.generate_book_id(current_books)
@@ -130,13 +133,13 @@ class GiaoDienAPI(tk.Frame):
                 )
                 
                 ql_book.addBook(new_book)
-                self.lbl_result.config(text=f"✅ Thêm sách mới với mã {book_id}, số lượng: {quantity}")
+                self.lbl_result.config(text=f"Thêm sách mới với mã {book_id}, số lượng: {quantity}")
                 
         except ValueError as e:
             messagebox.showerror("Lỗi", str(e))
         except Exception as e:
             messagebox.showerror("Lỗi", f"Có lỗi xảy ra khi thêm sách: {e}")
-    
+    # Tự động tạo mã sách MS001, MS002, ...
     def generate_book_id(self, current_books):
         """Tự động tạo mã sách MS001, MS002, ..."""
         max_id = 0

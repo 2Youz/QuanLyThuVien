@@ -6,9 +6,8 @@ class APIBook:
     def __init__(self):
         # Sử dụng Google Books API (miễn phí)
         self.base_url = "https://www.googleapis.com/books/v1/volumes"
-        
+    # Tìm kiếm sách qua API    
     def tim_kiem_sach(self, keyword, max_results=20):
-        """Tìm kiếm sách qua Google Books API"""
         try:
             # Tham số tìm kiếm
             params = {
@@ -42,9 +41,8 @@ class APIBook:
         except Exception as e:
             print(f"Lỗi: {e}")
             return []
-    
+    # Trích xuất thông tin sách từ dữ liệu trả về của API
     def extract_book_info(self, item):
-        """Trích xuất thông tin sách từ API response"""
         try:
             volume_info = item.get('volumeInfo', {})
             
@@ -89,9 +87,8 @@ class APIBook:
         except Exception as e:
             print(f"Lỗi trích xuất thông tin: {e}")
             return None
-
+    # Lấy chi tiết sách theo ID
     def get_book_detail(self, book_id):
-        """Lấy thông tin chi tiết của một cuốn sách"""
         try:
             url = f"{self.base_url}/{book_id}"
             response = requests.get(url, timeout=10)
@@ -106,11 +103,7 @@ class APIBook:
         except Exception as e:
             print(f"Lỗi lấy chi tiết sách: {e}")
             return None
-    
     def getBookByID(self, book_id):
-        """Alias method để tương thích với code hiện tại"""
         return self.get_book_detail(book_id)
-    
     def searchBooks(self, keyword):
-        """Alias method để tương thích với code hiện tại"""
         return self.tim_kiem_sach(keyword)

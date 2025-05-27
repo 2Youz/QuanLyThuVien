@@ -25,5 +25,14 @@
         "address": "28/2j, Quan 1",
         "shift": "06:00 - 10:00",
         "salary": 5000000.0
+    },
+    {
+        "staffID": "TT004",
+        "staffName": "Nguyen Van D",
+        "phone": "0123456777",
+        "email": "NguyenVanD@gmail.com",
+        "address": "Thu Duc",
+        "shift": "Chiều",
+        "salary": 5000000.0
     }
 ]

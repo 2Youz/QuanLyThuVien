@@ -42,21 +42,20 @@ class QuanLyBook:
     def addBook(self, book):
         for b in self.BookList:
             if b.bookID == book.bookID:
-                raise ValueError("❌ Mã sách đã tồn tại.")
+                raise ValueError("Mã sách đã tồn tại.")
         self.BookList.append(book)
         self.saveData()
-        print("✅ Thêm sách thành công!")
+        print("Thêm sách thành công!")
     # xóa sách theo mã sách
     def removeBook(self, bookID):
-        """Xóa sách theo mã sách"""
         before_count	 = len(self.BookList)
         self.BookList = [book for book in self.BookList if book.bookID != bookID]
         
         if len(self.BookList) == before_count:
-            raise ValueError("❌ Mã sách không tồn tại.")
+            raise ValueError("Mã sách không tồn tại.")
         
         self.saveData()
-        print("✅ Xóa sách thành công!")
+        print("Xóa sách thành công!")
     # cập nhật thông tin sách
     def updateBook(self, bookID, new_book):
         found = False
@@ -67,26 +66,23 @@ class QuanLyBook:
                 break
     
         if not found:
-            raise ValueError("❌ Mã sách không tồn tại.")
+            raise ValueError("Mã sách không tồn tại.")
     
         self.saveData()
-        print("✅ Cập nhật sách thành công!")
-    # lấy thông tin sách theo mã sách
+        print("Cập nhật sách thành công!")
+    # lấy tất cả sách
     def getAllBooks(self):
-        """Lấy tất cả sách"""
         if not self.BookList:
-            raise ValueError("❌ Không có sách nào trong danh sách.")
+            raise ValueError("Không có sách nào trong danh sách.")
         return self.BookList
-    
+    # lấy sách theo mã sách
     def getBookByID(self, bookID):
-        """Lấy sách theo mã sách"""
         for book in self.BookList:
             if book.bookID == bookID:
                 return book
         return None
-    
+    # tìm kiếm sách theo từ khóa
     def searchBooks(self, keyword):
-        """Tìm kiếm sách theo từ khóa"""
         results = []
         for book in self.BookList:
             if (keyword.lower() in book.bookName.lower() or 

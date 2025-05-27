@@ -12,7 +12,8 @@ class GiaoDienDangNhap(tk.Frame):
         self.main_window = None  # Để lưu reference đến cửa sổ chính
         self.master.title("Đăng Nhập")
         self.GiaoDien()
-
+    
+    # Thiết lập giao diện đăng nhập
     def GiaoDien(self):
         self.master.geometry("400x400")
         self.master.resizable(False, False)
@@ -60,7 +61,8 @@ class GiaoDienDangNhap(tk.Frame):
         self.entry_ten_dn.bind("<Return>", lambda e: self.entry_mat_khau.focus_set())
         self.entry_mat_khau.bind("<Return>", lambda e: self.DangNhap())
         self.combo_chuc_vu.bind("<Return>", lambda e: self.DangNhap())
-
+    
+    # Kiểm tra quyền đăng nhập
     def DangNhap(self):
         username = self.ten_dn.get().strip()
         password = self.mat_khau.get().strip()
@@ -92,22 +94,22 @@ class GiaoDienDangNhap(tk.Frame):
             self.clear_login_form()
         else:
             messagebox.showerror("Lỗi", "Tên đăng nhập, mật khẩu hoặc vai trò không đúng.")
-
+    
+    # Hàm callback khi đăng xuất
     def logout_callback(self):
-        """Callback được gọi khi người dùng đăng xuất"""
         if self.main_window:
             self.main_window.destroy()  # Đóng cửa sổ chính
             self.main_window = None
         
         self.master.deiconify()  # Hiển thị lại cửa sổ đăng nhập
         self.clear_login_form()  # Xóa thông tin đăng nhập cũ
-
+    
+    # Hàm xử lý khi cửa sổ chính bị đóng
     def on_main_window_close(self):
-        """Xử lý khi người dùng đóng cửa sổ chính bằng nút X"""
         self.logout_callback()
-
+    
+    # Xóa thông tin đăng nhập
     def clear_login_form(self):
-        """Xóa thông tin trong form đăng nhập"""
         self.ten_dn.set("")
         self.mat_khau.set("")
         self.combo_chuc_vu.set("Thủ Thư")

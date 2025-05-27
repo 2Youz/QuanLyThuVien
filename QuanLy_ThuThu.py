@@ -4,7 +4,6 @@ from DuLieu import ThuThu
 
 class QuanLyThuThu:
     def __init__(self):
-        """Khởi tạo quản lý thủ thư"""
         super().__init__()  # Gọi hàm khởi tạo của lớp cha
         # Danh sách thủ thư
         self.ThuThuList = []  # Danh sách thủ thư
@@ -23,7 +22,7 @@ class QuanLyThuThu:
                     # Validate required fields
                     required_fields = ['staffID', 'staffName', 'phone', 'email', 'address', 'shift', 'salary']
                     if not all(field in tt for field in required_fields):
-                        print(f"⚠️ Dữ liệu thiếu trường bắt buộc: {tt}")
+                        print(f"Dữ liệu thiếu trường bắt buộc: {tt}")
                         continue
                 
                     t = ThuThu(
@@ -36,15 +35,15 @@ class QuanLyThuThu:
                         tt['salary']
                     )
                     self.ThuThuList.append(t)
-            print(f"✅ Đã tải {len(self.ThuThuList)} thủ thư từ file.")
+            print(f"Đã tải {len(self.ThuThuList)} thủ thư từ file.")
         except json.JSONDecodeError as e:
-            print(f"❌ Lỗi khi đọc dữ liệu từ file JSON: {e}")
+            print(f"Lỗi khi đọc dữ liệu từ file JSON: {e}")
             self.ThuThuList = []
         except FileNotFoundError:
-            print(f"⚠️ File {self.thuthuFile} không tồn tại, tạo danh sách mới.")
+            print(f"File {self.thuthuFile} không tồn tại, tạo danh sách mới.")
             self.ThuThuList = []
         except Exception as e:
-            print(f"❌ Lỗi không xác định: {e}")
+            print(f"Lỗi không xác định: {e}")
             self.ThuThuList = []
     
     def saveData(self):
@@ -57,20 +56,20 @@ class QuanLyThuThu:
             with open(self.thuthuFile, "w", encoding="utf-8") as file:
                 thuthuData = [tt.to_dict() for tt in self.ThuThuList]
                 json.dump(thuthuData, file, indent=4, ensure_ascii=False)
-            print(f"✅ Đã lưu {len(self.ThuThuList)} thủ thư vào file.")
+            print(f"Đã lưu {len(self.ThuThuList)} thủ thư vào file.")
         except PermissionError:
-            print("❌ Không có quyền ghi file.")
+            print("Không có quyền ghi file.")
         except Exception as e:
-            print(f"❌ Lỗi khi lưu dữ liệu vào file JSON: {e}")
+            print(f"Lỗi khi lưu dữ liệu vào file JSON: {e}")
     
     # Thêm thủ thư mới
     def addThuThu(self, thuthu):
         for tt in self.ThuThuList:
             if tt.staffID == thuthu.staffID:
-                raise ValueError("❌ Mã thủ thư đã tồn tại.")
+                raise ValueError("Mã thủ thư đã tồn tại.")
         self.ThuThuList.append(thuthu)
         self.saveData()
-        print("✅ Thêm thủ thư thành công!")
+        print("Thêm thủ thư thành công!")
     
     # Xóa thủ thư theo mã thủ thư
     def removeThuThu(self, staffID):
@@ -78,10 +77,10 @@ class QuanLyThuThu:
         self.ThuThuList = [tt for tt in self.ThuThuList if tt.staffID != staffID]
         
         if len(self.ThuThuList) == before_count:
-            raise ValueError("❌ Mã thủ thư không tồn tại.")
+            raise ValueError("Mã thủ thư không tồn tại.")
         
         self.saveData()
-        print("✅ Xóa thủ thư thành công!")
+        print("Xóa thủ thư thành công!")
     
     # Cập nhật thông tin thủ thư
     def updateThuThu(self, staffID, new_thuthu):
@@ -89,21 +88,22 @@ class QuanLyThuThu:
             if tt.staffID == staffID:
                 self.ThuThuList[i] = new_thuthu
                 self.saveData()
-                print("✅ Cập nhật thủ thư thành công!")
+                print("Cập nhật thủ thư thành công!")
                 return
-        raise ValueError("❌ Mã thủ thư không tồn tại.")
+        raise ValueError("Mã thủ thư không tồn tại.")
     
+    # Lấy thủ thư theo mã thủ thư
     def getThuThuByID(self, staffID):
-        """Lấy thông tin thủ thư theo mã thủ thư"""
         for tt in self.ThuThuList:
             if tt.staffID == staffID:
                 return tt
         return None  # Trả về None thay vì raise Exception
     
+    # Lấy tất cả thủ thư
     def getAllThuThu(self):
-        """Lấy danh sách tất cả thủ thư"""
         return self.ThuThuList
     
+    # Tìm kiếm thủ thư theo từ khóa
     def searchThuThu(self, keyword):
         if not keyword or not keyword.strip():
             return []
@@ -122,10 +122,10 @@ class QuanLyThuThu:
                 results.append(tt)
         return results
     
+    # Đếm tổng số thủ thư
     def countThuThu(self):
-        """Đếm tổng số thủ thư"""
         return len(self.ThuThuList)
     
+    # Lấy danh sách thủ thư theo ca làm việc
     def getThuThuByShift(self, shift):
-        """Lấy danh sách thủ thư theo ca làm việc"""
         return [tt for tt in self.ThuThuList if tt.shift.lower() == shift.lower()]

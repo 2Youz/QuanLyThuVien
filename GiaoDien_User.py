@@ -58,40 +58,40 @@ class GiaoDienUser(tk.Frame):
         try:
             user = User(self.tenDN.get().strip(), self.matKhau.get().strip(), self.chucVu.get())
             if not user.username:
-                raise ValueError("❌ Tên đăng nhập không được để trống.")
+                raise ValueError("Tên đăng nhập không được để trống.")
             if not user.password:
-                raise ValueError("❌ Mật khẩu không được để trống.")
+                raise ValueError("Mật khẩu không được để trống.")
             if user.role == "Quản Lý":
                 user.permission = True
             else:
                 user.permission = False
             self.ql_user.addUser(user)
-            messagebox.showinfo("Thông báo", "✅ Thêm người dùng thành công!")
+            messagebox.showinfo("Thông báo", "Thêm người dùng thành công!")
             self.clear()
             self.tailaiDuLieu()
         except ValueError as e:
             messagebox.showerror("Lỗi", str(e))
         except Exception as e:
-            messagebox.showerror("Lỗi", f"❌ Lỗi khi thêm người dùng: {e}")
+            messagebox.showerror("Lỗi", f"Lỗi khi thêm người dùng: {e}")
     def remove(self):
         username = self.tenDN.get().strip()
         if not username:
-            messagebox.showerror("Lỗi", "❌ Vui lòng chọn người dùng để xóa.")
+            messagebox.showerror("Lỗi", "Vui lòng chọn người dùng để xóa.")
             return
         if messagebox.askyesno("Xác nhận", f"Bạn có chắc chắn muốn xóa người dùng '{username}'?"):
             try:
                 self.ql_user.removeUser(username)
-                messagebox.showinfo("Thông báo", "✅ Xóa người dùng thành công!")
+                messagebox.showinfo("Thông báo", "Xóa người dùng thành công!")
                 self.clear()
                 self.tailaiDuLieu()
             except ValueError as e:
                 messagebox.showerror("Lỗi", str(e))
             except Exception as e:
-                messagebox.showerror("Lỗi", f"❌ Lỗi khi xóa người dùng: {e}")
+                messagebox.showerror("Lỗi", f"Lỗi khi xóa người dùng: {e}")
     def update(self):
         username = self.tenDN.get().strip()
         if not username:
-            messagebox.showerror("Lỗi", "❌ Vui lòng chọn người dùng để cập nhật.")
+            messagebox.showerror("Lỗi", "Vui lòng chọn người dùng để cập nhật.")
             return
         try:
             self.ql_user.updateUser(username, {
@@ -99,7 +99,7 @@ class GiaoDienUser(tk.Frame):
                 "role": self.chucVu.get(),
                 "permission": self.chucVu.get() == "Quản Lý"
             })
-            messagebox.showinfo("Thông báo", "✅ Cập nhật người dùng thành công!")
+            messagebox.showinfo("Thông báo", "Cập nhật người dùng thành công!")
             self.clear()
             self.tailaiDuLieu()
         except ValueError as e:
@@ -112,8 +112,8 @@ class GiaoDienUser(tk.Frame):
 if __name__ == "__main__":
     
     root = tk.Tk()
-    root.geometry("480x450")  # Tăng kích thước để vừa với các widget
+    root.geometry("480x450")
     app = GiaoDienUser(root)
-    app.pack(fill="both", expand=True)  # 👉 dòng này giúp giao diện xuất hiện
+    app.pack(fill="both", expand=True)  
     root.resizable(False, False)
     root.mainloop()

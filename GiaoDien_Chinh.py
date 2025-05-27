@@ -1,10 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox, ttk
 from GiaoDien_User import GiaoDienUser
-from GiaoDien_Book import GiaoDienBook
 from GiaoDien_API import GiaoDienAPI
-from GiaoDien_ThuThu import GiaoDienThuThu
-
+from GiaoDien_TongHop import GiaoDienSachVaThuThu as GiaoDienTongHop
 class GiaoDienChinh(tk.Frame):
     def __init__(self, master, user_login, on_logout_callback=None):
         super().__init__(master)
@@ -39,7 +37,8 @@ class GiaoDienChinh(tk.Frame):
         self.khungChinh = tk.Frame(self, bg="white", relief="ridge", bd=2)
         self.khungChinh.pack(side="right", fill="both", expand=True, padx=5, pady=5)
         self.button_QuanLy()  # Gọi hàm để tạo nút Quản lý User
-
+    
+    # Tạo các nút trong sidebar
     def button_QuanLy(self):
         # Nút quản lý người dùng chỉ hiển thị nếu người dùng có quyền
         if self.user_login.permission:
@@ -54,20 +53,6 @@ class GiaoDienChinh(tk.Frame):
                 pady=10
             )
             btn_user.pack(fill="x", padx=10, pady=5)
-        
-        # Nút quản lý sách
-        btn_book = tk.Button(
-            self.sidebar,
-            text="Quản lý Sách",
-            command= self.open_BookQuanLy,
-            bg="#3498db",
-            fg="white",
-            font=("Arial", 10, "bold"),
-            relief="flat",
-            pady=10
-        )
-        btn_book.pack(fill="x", padx=10, pady=5)
-        
         # Nút tìm kiếm sách qua API chỉ hiển thị nếu người dùng có quyền
         btn_API = tk.Button(
             self.sidebar,
@@ -80,20 +65,18 @@ class GiaoDienChinh(tk.Frame):
             pady=10
         )
         btn_API.pack(fill="x", padx=10, pady=5)
-        
-        # Nút quản lý thủ thư chỉ hiển thị nếu người dùng có quyền
-        btn_thuthu = tk.Button(
-                self.sidebar,
-                text="Quản lý Thủ Thư",
-                command= self.open_ThuThuQuanLy,
-                bg="#f39c12",
-                fg="white",
-                font=("Arial", 10, "bold"),
-                relief="flat",
-                pady=10
-            )
-        btn_thuthu.pack(fill="x", padx=10, pady=5)
-        
+        # Nút quản lý sách và thủ thư
+        btn_tonghop = tk.Button(
+            self.sidebar,
+            text="Quản lý Tổng hợp",
+            command= self.open_TongHop,
+            bg="#16a085",  # Màu xanh lá đậm
+            fg="white",
+            font=("Arial", 10, "bold"),
+            relief="flat",
+            pady=10 
+        )
+        btn_tonghop.pack(fill="x", padx=10, pady=5)
         # Nút đăng xuất - Sửa đổi command
         btn_logout = tk.Button(
             self.sidebar,
@@ -106,9 +89,9 @@ class GiaoDienChinh(tk.Frame):
             pady=10
         )
         btn_logout.pack(fill="x", padx=10, pady=5, side="bottom")
-
+    
+    # Hàm xử lý đăng xuất
     def dang_xuat(self):
-        """Xử lý đăng xuất và quay về màn hình đăng nhập"""
         if self.on_logout_callback:
             self.on_logout_callback()  # Gọi callback để quay về màn hình đăng nhập
         else:
@@ -140,17 +123,12 @@ class GiaoDienChinh(tk.Frame):
         win.transient(self.master)
         win.grab_set()
         GiaoDienAPI(win)
-
-    # Mở giao diện quản lý sách
-    def open_BookQuanLy(self):
+    # Mở giao diện quản lý sách và thủ thư
+    def open_TongHop(self):
         self.xoa_KhungChinh()
-        GiaoDienBook(self.khungChinh)
-
-    # Mở giao diện quản lý thủ thư
-    def open_ThuThuQuanLy(self):
-        self.xoa_KhungChinh()
-        GiaoDienThuThu(self.khungChinh, self.user_login)
-
+        app_tonghop = GiaoDienTongHop(self.khungChinh, self.user_login)
+        app_tonghop.pack(fill="both", expand=True)
+        
 # Chạy thử giao diện
 if __name__ == "__main__":
     root = tk.Tk()

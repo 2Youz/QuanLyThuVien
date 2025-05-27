@@ -43,7 +43,7 @@ class QuanLyUser:
         users = self.loadData()
         for u in users:
             if u.username == user.username:
-                raise ValueError("❌ Tài khoản đã tồn tại.")
+                raise ValueError("Tài khoản đã tồn tại.")
         self.UserList.append(user)
         self.saveData()
     # Xóa người dùng theo tên đăng nhập
@@ -51,7 +51,7 @@ class QuanLyUser:
         users = self.loadData()
         new_users = [user for user in users if user.username != username]
         if len(new_users) == len(users):
-            raise ValueError("❌ Tài khoản không tồn tại.")
+            raise ValueError("Tài khoản không tồn tại.")
         self.UserList = new_users
         self.saveData()
     # Cập nhật thông tin người dùng
@@ -66,7 +66,7 @@ class QuanLyUser:
                 found = True
                 break
         if not found:
-            raise ValueError("❌ Tài khoản không tồn tại.")
+            raise ValueError("Tài khoản không tồn tại.")
         self.UserList = users
         self.saveData()
     # Lấy thông tin người dùng theo tên đăng nhập
