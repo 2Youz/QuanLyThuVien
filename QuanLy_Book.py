@@ -74,3 +74,5 @@ class QuanLyBook:
                 keyword_lower in book.category.lower()):
                 results.append(book)
         return results
+    def getAllBooks(self):
+        return self.BookList

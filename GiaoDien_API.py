@@ -11,6 +11,7 @@ class GiaoDienAPI(tk.Frame):
         self.master.title("Tìm Kiếm Sách Qua API")
         self.pack(fill="both", expand=True)
         self.ql_api = APIBook()
+        ql_book = QuanLyBook()
         self.GiaoDien()
     
     # Thiết lập giao diện chính
@@ -141,25 +142,24 @@ class GiaoDienAPI(tk.Frame):
             messagebox.showerror("Lỗi", f"Có lỗi xảy ra khi thêm sách: {e}")
     # Tự động tạo mã sách MS001, MS002, ...
     def generate_book_id(self, current_books):
-        """Tự động tạo mã sách MS001, MS002, ..."""
-        max_id = 0
+        existing_ids = set()
         for book in current_books:
-            if hasattr(book, 'bookID') and book.bookID.startswith("MS") and len(book.bookID) == 5:
+            if hasattr(book, 'bookID') and isinstance(book.bookID, str) and book.bookID.startswith("MS") and len(book.bookID) == 5:
                 try:
                     num = int(book.bookID[2:])
-                    if num > max_id:
-                        max_id = num
+                    existing_ids.add(num)
                 except:
                     continue
-        
-        return f"MS{max_id + 1:03d}"
+        for i in range(1, 1000):
+            if i not in existing_ids:
+                return f"MS{i:03d}"
+        raise ValueError("Hết mã sách khả dụng")
             
     def clear(self):
         self.keyword.set("")
         for item in self.tree.get_children():
             self.tree.delete(item)
         self.lbl_result.config(text="")
-
 # Chạy thử
 if __name__ == "__main__":
     root = tk.Tk()

@@ -173,5 +173,12 @@
         "author": "HUIT",
         "category": "Chung",
         "quantity": 200
+    },
+    {
+        "bookID": "MS026",
+        "bookName": "Prehistoric Thessaly",
+        "author": "Alan John Bayard Wace, Maurice Scott Thompson",
+        "category": "History",
+        "quantity": 1
     }
 ]
