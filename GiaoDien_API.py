@@ -157,10 +157,3 @@ class GiaoDienAPI(tk.Frame):
         for item in self.tree.get_children():
             self.tree.delete(item)
         self.lbl_result.config(text="")
-# Chạy thử
-if __name__ == "__main__":
-    root = tk.Tk()
-    app = GiaoDienAPI(root)
-    app.pack(fill="both", expand=True)
-    root.geometry("700x400")
-    root.mainloop()
