@@ -194,5 +194,26 @@
         "author": "Ahmed Y. Zohny",
         "category": "Political Science",
         "quantity": 1
+    },
+    {
+        "bookID": "MS015",
+        "bookName": "Demon Slayer: Kimetsu no Yaiba, Vol. 7",
+        "author": "Koyoharu Gotouge,Ryoji Hirano",
+        "category": "Comics & Graphic Novels",
+        "quantity": 200
+    },
+    {
+        "bookID": "MS016",
+        "bookName": "TV anime Demon slayer. Kimetsu no yaiba official characters book",
+        "author": "Koyoharu Gotouge",
+        "category": "Comics & Graphic Novels",
+        "quantity": 200
+    },
+    {
+        "bookID": "MS031",
+        "bookName": "DEMON SLAYER",
+        "author": "NARAYAN CHANGDER",
+        "category": "Juvenile Nonfiction",
+        "quantity": 300
     }
 ]

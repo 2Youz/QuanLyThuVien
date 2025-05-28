@@ -25,5 +25,14 @@
         "address": "Ngo 39 Yen Lang, Dong Da, Ha Noi",
         "shift": "06:00 - 10:00 & 14:00 - 18:00",
         "salary": 10000000.0
+    },
+    {
+        "staffID": "TT004",
+        "staffName": "NguyenVanTeo",
+        "phone": "0391234567",
+        "email": "NguyenVanTeo@gmail.com",
+        "address": "59/2H, Quan 12, TP. HCM",
+        "shift": "06:00 - 10:00",
+        "salary": 5000000.0
     }
 ]

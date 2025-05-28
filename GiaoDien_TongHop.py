@@ -135,7 +135,10 @@ class GiaoDienNutBam(tk.Frame):
     def them(self):
         try:
             if self.mode == "book":
-                if self.var_soluong.get() < 0:
+                if not self.var_ten.get() or not self.var_tacgia.get():
+                    messagebox.showerror("Lỗi", "Các thông tin không được để trống")
+                    return
+                if self.var_soluong.get() <= 0:
                     messagebox.showerror("Lỗi", "Số lượng không được âm")
                     return
                 book = Book(self.var_ma.get(), self.var_ten.get(), 
@@ -144,7 +147,10 @@ class GiaoDienNutBam(tk.Frame):
                 self.ql_book.addBook(book)
                 messagebox.showinfo("Thông báo", "Thêm sách thành công")
             else:
-                if self.var_luong.get() < 0:
+                if not self.var_ten.get() or not self.var_sdt.get() or not self.var_email.get() or not self.var_diachi.get():
+                    messagebox.showerror("Lỗi", "Các thông tin không được để trống")
+                    return
+                if self.var_luong.get() <= 0:
                     messagebox.showerror("Lỗi", "Lương không được âm")
                     return
                 if not re.match(r"^\d{10}$", self.var_sdt.get()):
@@ -206,7 +212,7 @@ class GiaoDienNutBam(tk.Frame):
                 if not self.var_ten.get() or not self.var_tacgia.get():
                     messagebox.showerror("Lỗi", "Các thông tin không được để trống")
                     return
-                if self.var_soluong.get() < 0:
+                if self.var_soluong.get() <= 0:
                     messagebox.showerror("Lỗi", "Số lượng không được âm")
                     return
                 book = Book(ma, self.var_ten.get(), 
@@ -216,7 +222,7 @@ class GiaoDienNutBam(tk.Frame):
                 messagebox.showinfo("Thông báo", "Sửa sách thành công")
                 self.win.destroy()
             else:
-                if self.var_luong.get() < 0:
+                if self.var_luong.get() <= 0:
                     messagebox.showerror("Lỗi", "Lương không được âm")
                     return
                 if not re.match(r"^\d{10}$", self.var_sdt.get()):
