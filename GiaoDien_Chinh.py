@@ -36,7 +36,25 @@ class GiaoDienChinh(tk.Frame):
         # Tạo Khung chính
         self.khungChinh = tk.Frame(self, bg="white", relief="ridge", bd=2)
         self.khungChinh.pack(side="right", fill="both", expand=True, padx=5, pady=5)
-        self.button_QuanLy()  # Gọi hàm để tạo nút Quản lý User
+        self.LabelKhungChinh = tk.Label(
+            self.khungChinh,
+            text="PHẦN MỀM QUẢN LÝ THƯ VIỆN VÀ THỦ THƯ",
+            bg="white",
+            fg="#2c3e50",
+            font=("Arial", 16, "bold"),
+            pady=20
+        )
+        self.LabelKhungChinh.pack(fill="x")
+        self.welcome_KhungChinh = tk.Label(
+            self.khungChinh,
+            text="Chào mừng bạn! Hãy chọn chức năng từ thanh bên trái để bắt đầu",
+            bg="white",
+            fg="#34495e",
+            font=("Arial", 12),
+            pady=10
+        )
+        self.welcome_KhungChinh.pack(fill="x")
+        self.button_QuanLy()  # Gọi hàm để tạo nút Quản lý
     
     # Tạo các nút trong sidebar
     def button_QuanLy(self):
@@ -129,15 +147,3 @@ class GiaoDienChinh(tk.Frame):
         self.xoa_KhungChinh()
         app_tonghop = GiaoDienTongHop(self.khungChinh, self.user_login)
         app_tonghop.pack(fill="both", expand=True)
-        
-# Chạy thử giao diện
-if __name__ == "__main__":
-    root = tk.Tk()
-    root.geometry("1200x700")  # Kích thước cửa sổ chính
-    user_login = type('User', (object,), {
-        'username': 'admin',
-        'permission': True
-    })()  # Tạo đối tượng người dùng giả lập
-    app = GiaoDienChinh(root, user_login)
-    app.pack(fill="both", expand=True)  # Hiển thị giao diện
-    root.mainloop()  # Bắt đầu vòng lặp sự kiện của Tkinter

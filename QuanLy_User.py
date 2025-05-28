@@ -67,7 +67,7 @@ class QuanLyUser:
                 found = True
                 break
         
-        if not found:
+        if found == False:
             raise ValueError("Tài khoản không tồn tại.")
         
         self.saveData()

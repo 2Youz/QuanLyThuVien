@@ -8,3 +8,4 @@ if __name__ == "__main__":
     app.pack(fill="both", expand=True)
     root.resizable(False, False)
     root.mainloop()
+    

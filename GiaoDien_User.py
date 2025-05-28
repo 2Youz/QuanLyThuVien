@@ -78,6 +78,9 @@ class GiaoDienUser(tk.Frame):
             if len(username) < 6:
                 messagebox.showerror("Lỗi", "Tên đăng nhập phải có ít nhất 6 ký tự")
                 return
+            if username == self.matKhau.get().strip():
+                messagebox.showerror("Lỗi", "Tên đăng nhập và mật khẩu không được trùng nhau.")
+                return
             user = User(username, password, role, role == "Quản Lý")
             self.ql_user.addUser(user)
             messagebox.showinfo("Thông báo", "Thêm người dùng thành công!")
@@ -105,9 +108,17 @@ class GiaoDienUser(tk.Frame):
     def update(self):
         username = self.tenDN.get().strip()
         if not username:
-            messagebox.showerror("Lỗi", "Vui lòng chọn người dùng để cập nhật.")
+            messagebox.showerror("Lỗi", "Tài khoản không được để trống.")
             return
-            
+        if not self.matKhau.get().strip():
+            messagebox.showerror("Lỗi", "Mật khẩu không được để trống.")
+            return
+        if len(self.matKhau.get().strip()) < 6:
+            messagebox.showerror("Lỗi", "Mật khẩu phải có ít nhất 6 ký tự.")
+            return
+        if username == self.matKhau.get().strip():
+            messagebox.showerror("Lỗi", "Tên đăng nhập và mật khẩu không được trùng nhau.")
+            return
         try:
             self.ql_user.updateUser(username, {
                 "password": self.matKhau.get().strip(),

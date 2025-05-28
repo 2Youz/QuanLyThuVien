@@ -21,13 +21,6 @@
         "quantity": 13
     },
     {
-        "bookID": "MS005",
-        "bookName": "Kinh te Viet Nam - Thang Tram va Dot Pha",
-        "author": "Phạm Minh Chính, Vương Quân Hoàng",
-        "category": "Chung",
-        "quantity": 1
-    },
-    {
         "bookID": "MS006",
         "bookName": "Boi canh REDD+ Viet Nam: Nguyên nhân, doi tuong và the che",
         "author": "Pham Thu Thuy, Moira Moeliono, Nguyen Thi Hien, Nguyen Huu Tho, Vu Thi Hien",
@@ -56,13 +49,6 @@
         "quantity": 1
     },
     {
-        "bookID": "MS010",
-        "bookName": "The ‘Hidden Curriculum’ of Vietnam’s English School Textbooks",
-        "author": "Thi Duyen Phuong, Raf Vanderstraeten",
-        "category": "Education",
-        "quantity": 1
-    },
-    {
         "bookID": "MS011",
         "bookName": "Recent Trends in Vietnam’s Rapid Economic Development",
         "author": "Pham Khanh Nam, Almas Heshmati",
@@ -88,20 +74,6 @@
         "bookName": "Vietnam's Political Process",
         "author": "Casey Lucius",
         "category": "Political Science",
-        "quantity": 1
-    },
-    {
-        "bookID": "MS015",
-        "bookName": "The Vietnam War Files",
-        "author": "Jeffrey P. Kimball",
-        "category": "Biography & Autobiography",
-        "quantity": 1
-    },
-    {
-        "bookID": "MS016",
-        "bookName": "The Johnson Years: Vietnam, the environment, and science",
-        "author": "Robert A. Divine",
-        "category": "United States",
         "quantity": 1
     },
     {
@@ -207,6 +179,20 @@
         "bookName": "Vietnam Statistical Yearbook",
         "author": "Không rõ tác giả",
         "category": "Chung",
+        "quantity": 1
+    },
+    {
+        "bookID": "MS010",
+        "bookName": "Wheels of Time: A Journey Through the History of Automobiles",
+        "author": "Thomas C. Bunton",
+        "category": "Transportation",
+        "quantity": 1
+    },
+    {
+        "bookID": "MS005",
+        "bookName": "Donald Trump’s Digital Diplomacy and Its Impact on US Foreign Policy towards the Middle East",
+        "author": "Ahmed Y. Zohny",
+        "category": "Political Science",
         "quantity": 1
     }
 ]

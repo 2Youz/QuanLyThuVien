@@ -7,13 +7,13 @@
     },
     {
         "username": "1",
-        "password": "1",
-        "role": "Quản Lý",
-        "permission": true
+        "password": "123456",
+        "role": "Thủ Thư",
+        "permission": false
     },
     {
         "username": "nhanvien",
-        "password": "1",
+        "password": "123",
         "role": "Thủ Thư",
         "permission": false
     },
@@ -26,6 +26,12 @@
     {
         "username": "",
         "password": "",
+        "role": "Thủ Thư",
+        "permission": false
+    },
+    {
+        "username": "123456",
+        "password": "123456",
         "role": "Thủ Thư",
         "permission": false
     }

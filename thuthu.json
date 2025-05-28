@@ -9,15 +9,6 @@
         "salary": 10000000.0
     },
     {
-        "staffID": "TT003",
-        "staffName": "Nguyen Van C",
-        "phone": "0382838505",
-        "email": "NguyenVanC@gmail.com",
-        "address": "28/2k, Quan 1",
-        "shift": "06:00 - 10:00 & 10:00 - 14:00",
-        "salary": 5000000.0
-    },
-    {
         "staffID": "TT001",
         "staffName": "Nguyen Van A",
         "phone": "0123456789",
@@ -25,5 +16,14 @@
         "address": "Ngo 38 Yen Lang, Dong Da, Ha Noi",
         "shift": "Toàn thời gian",
         "salary": 15000000.0
+    },
+    {
+        "staffID": "TT003",
+        "staffName": "Nguyễn Văn C",
+        "phone": "0123456786",
+        "email": "NguyenVanC@gmail.com",
+        "address": "Ngo 39 Yen Lang, Dong Da, Ha Noi",
+        "shift": "06:00 - 10:00 & 14:00 - 18:00",
+        "salary": 10000000.0
     }
 ]
