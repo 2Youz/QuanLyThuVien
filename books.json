@@ -208,5 +208,19 @@
         "author": "NARAYAN CHANGDER",
         "category": "Juvenile Nonfiction",
         "quantity": 300
+    },
+    {
+        "bookID": "MS028",
+        "bookName": "A Dictionary of Music and Musicians",
+        "author": "George Grove",
+        "category": "Music",
+        "quantity": 1
+    },
+    {
+        "bookID": "MS032",
+        "bookName": "Dictionarium Anamitico-Latinum et latino-Anamiticum primitus inceptum a Petro-Josepho Pigneaux de Behaine",
+        "author": "Jean Louis Taberd",
+        "category": "Chung",
+        "quantity": 1
     }
 ]

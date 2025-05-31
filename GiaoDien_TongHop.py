@@ -135,7 +135,8 @@ class GiaoDienNutBam(tk.Frame):
     def them(self):
         try:
             if self.mode == "book":
-                if not self.var_ma.get().startswith("MS"):
+                ma_sach = self.var_ma.get().strip()
+                if not ma_sach.startswith("MS"):
                     messagebox.showerror("Lỗi", "Mã sách phải bắt đầu bằng 'MS'")
                     return
                 if not self.var_ten.get() or not self.var_tacgia.get():
@@ -150,7 +151,8 @@ class GiaoDienNutBam(tk.Frame):
                 self.ql_book.addBook(book)
                 messagebox.showinfo("Thông báo", "Thêm sách thành công")
             else:
-                if not self.var_ma.get().startswith("TT"):
+                ma_thuthu = self.var_ma.get().strip()
+                if not ma_thuthu.startswith("TT"):
                     messagebox.showerror("Lỗi", "Mã thủ thư phải bắt đầu bằng 'TT'")
                     return
                 if not self.var_ten.get() or not self.var_sdt.get() or not self.var_email.get() or not self.var_diachi.get():
@@ -161,6 +163,9 @@ class GiaoDienNutBam(tk.Frame):
                     return
                 if not re.match(r"^\d{10}$", self.var_sdt.get()):
                     messagebox.showerror("Lỗi", "Số điện thoại không hợp lệ")
+                    return
+                if not self.var_sdt.get().startswith("0"):
+                    messagebox.showerror("Lỗi", "Số điện thoại phải bắt đầu bằng 0")
                     return
                 if not re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$', self.var_email.get()):
                     messagebox.showerror("Lỗi", "Email không hợp lệ")
@@ -228,17 +233,20 @@ class GiaoDienNutBam(tk.Frame):
                 messagebox.showinfo("Thông báo", "Sửa sách thành công")
                 self.win.destroy()
             else:
+                if not self.var_ten.get() or not self.var_sdt.get() or not self.var_email.get():
+                    messagebox.showerror("Lỗi", "Các thông tin không được để trống")
                 if self.var_luong.get() <= 0:
                     messagebox.showerror("Lỗi", "Lương không được âm")
                     return
                 if not re.match(r"^\d{10}$", self.var_sdt.get()):
                     messagebox.showerror("Lỗi", "Số điện thoại không hợp lệ")
                     return
+                if not self.var_sdt.get().startswith("0"):
+                    messagebox.showerror("Lỗi", "Số điện thoại phải bắt đầu bằng 0")
+                    return
                 if not re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$', self.var_email.get()):
                     messagebox.showerror("Lỗi", "Email không hợp lệ")
                     return
-                if not self.var_ten.get() or not self.var_sdt.get() or not self.var_email.get():
-                    messagebox.showerror("Lỗi", "Các thông tin không được để trống")
                     return
                 thuthu = ThuThu(ma, self.var_ten.get(),
                             self.var_sdt.get(), self.var_email.get(),

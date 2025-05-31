@@ -72,7 +72,7 @@ class GiaoDienUser(tk.Frame):
             if len(password) < 6:
                 messagebox.showerror("Lỗi","Mật khẩu phải có ít nhất 6 ký tự")
                 return
-            if not re.match(r"^[a-zA-Z0-9_]+$", username):
+            if not re.match(r"^[a-zA-Z0-9]+$", username):
                 messagebox.showerror("Lỗi", "Tên đăng nhập không được chứa ký tự đặc biệt")
                 return
             if len(username) < 6:

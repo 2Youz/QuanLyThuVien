@@ -34,5 +34,14 @@
         "address": "59/2H, Quan 12, TP. HCM",
         "shift": "06:00 - 10:00",
         "salary": 5000000.0
+    },
+    {
+        "staffID": "TT005",
+        "staffName": "đa",
+        "phone": "1234567890",
+        "email": "123@gmail.com",
+        "address": "zda",
+        "shift": "06:00 - 10:00",
+        "salary": 0.023123
     }
 ]
