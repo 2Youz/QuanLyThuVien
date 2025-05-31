@@ -161,13 +161,6 @@
         "quantity": 1
     },
     {
-        "bookID": "MS028",
-        "bookName": "Vui Lòng",
-        "author": "Tui",
-        "category": "Sách giáo khoa",
-        "quantity": 12
-    },
-    {
         "bookID": "MS029",
         "bookName": "Senate documents",
         "author": "Không rõ tác giả",

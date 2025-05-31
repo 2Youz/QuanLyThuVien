@@ -135,6 +135,9 @@ class GiaoDienNutBam(tk.Frame):
     def them(self):
         try:
             if self.mode == "book":
+                if not self.var_ma.get().startswith("MS"):
+                    messagebox.showerror("Lỗi", "Mã sách phải bắt đầu bằng 'MS'")
+                    return
                 if not self.var_ten.get() or not self.var_tacgia.get():
                     messagebox.showerror("Lỗi", "Các thông tin không được để trống")
                     return
@@ -147,6 +150,9 @@ class GiaoDienNutBam(tk.Frame):
                 self.ql_book.addBook(book)
                 messagebox.showinfo("Thông báo", "Thêm sách thành công")
             else:
+                if not self.var_ma.get().startswith("TT"):
+                    messagebox.showerror("Lỗi", "Mã thủ thư phải bắt đầu bằng 'TT'")
+                    return
                 if not self.var_ten.get() or not self.var_sdt.get() or not self.var_email.get() or not self.var_diachi.get():
                     messagebox.showerror("Lỗi", "Các thông tin không được để trống")
                     return
